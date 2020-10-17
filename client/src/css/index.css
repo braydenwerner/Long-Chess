@@ -1,0 +1,171 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(41, 45, 62);
+}
+
+#joinContainer {
+    animation: fade-in 8.5s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+@media (max-width: 500px) {
+    #mainHeader {
+        font-family: 'Tangerine', cursive;
+        font-size: 60px;
+        margin-bottom: 5%;
+        margin-top: 300px;
+        color: rgb(199, 146, 234);
+    }
+}
+
+@media (min-width: 500px) {
+    #mainHeader {
+        font-family: 'Tangerine', cursive;
+        font-size: 100px;
+        margin-bottom: 5%;
+        margin-top: 300px;
+        color: rgb(199, 146, 234);
+    }
+}
+
+@media (min-width: 900px) {
+    #mainHeader {
+        font-family: 'Tangerine', cursive;
+        font-size: 160px;
+        margin-bottom: 5%;
+        margin-top: 300px;
+        color: rgb(199, 146, 234);
+    }
+}
+
+@media (min-width: 1200px) {
+    #mainHeader {
+        font-family: 'Tangerine', cursive;
+        font-size: 260px;
+        margin-bottom: 5%;
+        color: rgb(199, 146, 234);
+        margin-top: 200px;
+    }
+}
+
+#createRoomButton {
+    width: 25%;
+    padding: 1%;
+    margin-bottom: 50px;
+    background-color: rgb(97, 98, 1311);
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 100%;
+    color: rgb(14, 17, 22);
+}
+
+#joinRoomButton {
+    width: 25%;
+    padding: 1%;
+    margin-bottom: 50px;
+    background-color: rgb(97, 98, 1311);
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 100%;
+    color: rgb(14, 17, 22);
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#createRoomPopupOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    ;
+}
+
+#createRoomContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 300px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(53, 53, 53);
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#createRoomInput {
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 5%;
+    padding: 5px;
+    width: 50%;
+}
+
+#closeCreateRoomPopup {
+    margin-top: 10px;
+}
+
+#joinRoomPopupOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    ;
+}
+
+#joinRoomContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 300px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(53, 53, 53);
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#joinRoomInput {
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 5%;
+    padding: 5px;
+    width: 50%;
+}
+
+#closeJoinRoomPopup {
+    margin-top: 10px;
+}
+
+#display {
+    display: none;
+}
