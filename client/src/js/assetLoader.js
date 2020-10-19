@@ -1,13 +1,13 @@
 const IMAGES_FILES = [
     "bishopWhite.png",
-    "blackBishop.png",
+    "bishopBlack.png",
     "kingBlack.png",
     "kingWhite.png",
     "knightBlack.png",
     "knightWhite.png",
     "pawnBlack.png",
     "pawnWhite.png",
-    "queenBack.png",
+    "queenBlack.png",
     "queenWhite.png",
     "rookBlack.png",
     "rookWhite.png",
@@ -24,7 +24,7 @@ function downloadImage(imageName) {
             resolve();
         };
 
-        image.src = `./Images/${imageName}`;
+        image.src = `../Images/${imageName}`;
     });
 }
 

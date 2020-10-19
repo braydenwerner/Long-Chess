@@ -19,19 +19,21 @@ io.on("connection", socket => {
   socket.on("/createRoom", roomName => {
     if (game.rooms[roomName]) socket.emit("/alreadyExists");
     else {
+      socket.emit("/noError");
       game.addSocket(socket, roomName);
     }
   });
 
   socket.on("/joinRoom", roomName => {
-    if (game.rooms[roomName] && game.rooms[roomName].sockets.length >= 2) socket.emit("/roomFull");
+    if (!game.rooms[roomName] || game.rooms[roomName].sockets.length >= 2) socket.emit("/roomFullOrNotExist");
     else {
+      socket.emit("/noError");
       game.addSocket(socket, roomName);
     }
   })
 
-  socket.on("/input", inputData => {
-    game.input(socket, inputData);
+  socket.on("/sendMove", moveData => {
+    game.sendMove(socket, moveData);
   });
 
   socket.on("disconnect", () => {

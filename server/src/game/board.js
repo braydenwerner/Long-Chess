@@ -1,31 +1,39 @@
 const Bishop = require("./pieces/bishop");
-const board = require("./pieces/initBoard");
 const King = require("./pieces/king");
 const Knight = require("./pieces/knight");
 const Pawn = require("./pieces/pawn");
 const Queen = require("./pieces/queen");
 const Rook = require("./pieces/rook");
+const Constants = require("../../constantServer.js");
 
 class Board {
     constructor() {
-        this.board = board;
+        this.board =
+            [[new Rook("Black"), new Queen("Black"), new King("Black"), new Rook("Black")],
+            [new Bishop("Black"), new Knight("Black"), new Knight("Black"), new Bishop("Black")],
+            [new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black")],
+            ["empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty"],
+            [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
+            [new Bishop("White"), new Knight("White"), new Knight("White"), new Bishop("White")],
+            [new Rook("White"), new Queen("White"), new King("White"), new Rook("White")]];
     }
 
     serializeBoard() {
         //return a board of all string values to render clientside
-        let clientBoard = new Array(8);
+        let clientBoard = new Array(Constants.NUM_TILES_HEIGHT);
         for (let i = 0; i < clientBoard.length; i++) {
-            clientBoard[i] = new Array(8);
+            clientBoard[i] = new Array(Constants.NUM_TILES_WIDTH);
         }
 
         for (let i = 0; i < this.board.length; i++) {
             for (let j = 0; j < this.board[0].length; j++) {
-                if (this.board[i][j] instanceof Bishop) clientBoard[i][j] = { type: "bishop", color: this.board[i][j].color };
-                else if (this.board[i][j] instanceof King) clientBoard[i][j] = { type: "king", color: this.board[i][j].color };
-                else if (this.board[i][j] instanceof Knight) clientBoard[i][j] = { type: "knight", color: this.board[i][j].color };
-                else if (this.board[i][j] instanceof Pawn) clientBoard[i][j] = { type: "pawn", color: this.board[i][j].color };
-                else if (this.board[i][j] instanceof Queen) clientBoard[i][j] = { type: "queen", color: this.board[i][j].color };
-                else if (this.board[i][j] instanceof Rook) clientBoard[i][j] = { type: "rook", color: this.board[i][j].color };
+                if (this.board[i][j] instanceof Bishop) clientBoard[i][j] = "bishop" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof King) clientBoard[i][j] = "king" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Knight) clientBoard[i][j] = "knight" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Pawn) clientBoard[i][j] = "pawn" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Queen) clientBoard[i][j] = "queen" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Rook) clientBoard[i][j] = "rook" + this.board[i][j].color + ".png";
                 else clientBoard[i][j] = "empty";
             }
         }

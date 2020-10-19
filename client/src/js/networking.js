@@ -1,5 +1,6 @@
 import { processGameUpdate } from "./gameUpdate.js";
-import { duplicateRoom, roomFull } from "./app.js";
+import { duplicateRoom, roomFullOrNotExist, noError } from "./app.js";
+import { invalidMove } from "./render.js";
 
 const PORT = "http://localhost:4000";
 export const socket = io(PORT);
@@ -14,7 +15,9 @@ export const connect = () => {
     connectedPromise.then(() => {
         socket.on("/gameUpdate", processGameUpdate);
         socket.on("/alreadyExists", duplicateRoom);
-        socket.on("/roomFull", roomFull);
+        socket.on("/roomFullOrNotExist", roomFullOrNotExist);
+        socket.on("/noError", noError);
+        socket.on("/invalidMove", invalidMove);
     });
 }
 
@@ -26,9 +29,6 @@ export const joinRoom = roomName => {
     socket.emit("/joinRoom", roomName);
 }
 
-export const handleInput = (e) => {
-    if (e.key === "ArrowLeft") socket.emit("/input", "left");
-    if (e.key === "ArrowRight") socket.emit("/input", "right");
-    if (e.key === "ArrowUp") socket.emit("/input", "up");
-    if (e.key === "ArrowDown") socket.emit("/input", "down");
+export const sendMove = moveData => {
+    socket.emit("/sendMove", moveData)
 }

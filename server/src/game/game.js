@@ -27,8 +27,14 @@ class Game {
     });
   }
 
-  input(socket, inputData) {
-    this.players[socket.id].input(inputData);
+  sendMove(socket, moveData) {
+    Object.keys(this.rooms).forEach(roomID => {
+      const room = this.rooms[roomID];
+
+      room.sockets.map(s => {
+        if (socket == s) room.makeMove(socket, moveData);
+      });
+    });
   }
 
   update() {
@@ -37,6 +43,11 @@ class Game {
       const room = this.rooms[roomID];
 
       if (room.sockets.length == 0) delete this.rooms[room.roomName];
+    });
+
+    //update each room
+    Object.keys(this.rooms).forEach(roomID => {
+      this.rooms[roomID].update();
     });
 
     if (this.shouldSendUpdate) {

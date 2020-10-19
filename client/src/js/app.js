@@ -30,12 +30,13 @@ createRoomInput.onkeyup = e => {
     }
 }
 
-joinRoomButton.onclick = () => {
-    joinRoomPopupOverlay.style.display = "initial";
+closeCreateRoomPopup.onclick = () => {
+    console.log("r");
+    createRoomPopupOverlay.style.display = "none";
 }
 
-closeCreateRoomPopup.onclick = () => {
-    closeCreateRoomPopup.style.display = "none";
+joinRoomButton.onclick = () => {
+    joinRoomPopupOverlay.style.display = "initial";
 }
 
 joinRoomInput.onkeyup = e => {
@@ -51,28 +52,29 @@ closeJoinRoomPopup.onclick = () => {
 }
 
 function startGame(room, joinOption) {
-    joinContainer.style.display = "none";
-    display.style.display = "initial";
-
     if (joinOption === "create") createRoom(room);
     else if (joinOption === "join") joinRoom(room);
-
-    startCaptureInput();
-    startRender();
 }
 
 export function duplicateRoom() {
     display.style.display = "none";
-    joinContainer.style.display = "initial";
     createRoomPopupOverlay.style.display = "initial";
     alert("Room already exists!");
 }
 
-export function roomFull() {
+export function roomFullOrNotExist() {
     display.style.display = "none";
-    joinContainer.style.display = "initial";
     createRoomPopupOverlay.style.display = "initial";
-    alert("Room is full!");
+    alert("Room is full or does not exist!");
+}
+
+//if game can start
+export function noError() {
+    joinContainer.style.display = "none";
+    display.style.display = "initial";
+
+    startCaptureInput();
+    startRender();
 }
 
 
