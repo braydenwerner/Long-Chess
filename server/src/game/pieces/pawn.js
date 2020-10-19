@@ -10,12 +10,7 @@ class Pawn {
     //not out of bounds, opposite color piece diagonal left/right
     getMoves(board, row, col) {
         let possibleMoves = [];
-        console.log(board);
-        console.log(row);
-        console.log(col);
-        console.log(board[row][col]);
 
-        console.log(row - 1 >= 0);
         if (this.color === "White") {
             if (row - 1 >= 0 && board[row - 1][col] === "empty") {
                 possibleMoves.push({
