@@ -27,6 +27,10 @@ function initMapVars() {
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
 }
 
+function startRendering() {
+    setInterval(1000 / 60, render);
+}
+
 export function render() {
     ctx.fillStyle = "WHITE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);

@@ -26,7 +26,7 @@ export function processGameUpdate(update) {
     }
 
     //render after recieving an update
-    render();
+    //render();
 }
 
 function currentServerTime() {

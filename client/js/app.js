@@ -1,6 +1,7 @@
 import { connect, createRoom, joinRoom } from "./networking.js";
 import { startCaptureInput } from "./input.js"
 import { downloadImages } from "./assetLoader.js";
+import { startRendering } from "./render.js";
 
 const joinContainer = document.getElementById("joinContainer");
 const createRoomButton = document.getElementById("createRoomButton");
@@ -73,6 +74,7 @@ export function noError() {
     display.style.display = "initial";
 
     startCaptureInput();
+    startRendering();
 }
 
 
