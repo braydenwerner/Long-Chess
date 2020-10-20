@@ -28,7 +28,7 @@ function initMapVars() {
 }
 
 export function startRendering() {
-    setInterval(1000 / 60, render);
+    setInterval(render, 1000 / 60);
 }
 
 export function render() {
