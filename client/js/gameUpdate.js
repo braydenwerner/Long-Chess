@@ -4,6 +4,8 @@ const gameUpdates = [];
 let gameStart = 0;
 let firstServerTimestamp = 0;
 
+import { render } from "./render.js";
+
 export function initState() {
     gameStart = 0;
     firstServerTimestamp = 0;
@@ -22,6 +24,9 @@ export function processGameUpdate(update) {
     if (base > 0) {
         gameUpdates.splice(0, base);
     }
+
+    //render after recieving an update
+    render();
 }
 
 function currentServerTime() {

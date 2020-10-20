@@ -24,7 +24,7 @@ function downloadImage(imageName) {
             resolve();
         };
 
-        image.src = `../Images/${imageName}`;
+        image.src = `./Images/${imageName}`;
     });
 }
 

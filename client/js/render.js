@@ -27,11 +27,7 @@ function initMapVars() {
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
 }
 
-export function startRender() {
-    setInterval(render, 1000 / 60);
-}
-
-function render() {
+export function render() {
     ctx.fillStyle = "WHITE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     //current socket = socket.id
@@ -41,13 +37,15 @@ function render() {
     whiteID = room.whiteID;
     board = room.board;
 
+    if (shouldDeselectPiece) {
+        deselectPiece();
+    }
+
     renderBoard(board);
 
     if (room.numPlayers < 2) renderWaitingForPlayers();
 
-    if (shouldDeselectPiece) {
-        deselectPiece();
-    }
+
 }
 
 function renderBoard(board) {
