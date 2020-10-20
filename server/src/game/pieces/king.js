@@ -9,8 +9,9 @@ class King {
         let possibleMoves = [];
 
         //king cannot put self into check
+        //have an array of all the threatened squares?>
         //top
-        if (row - 1 >= 0 && board[row][col])
+        //if (row - 1 >= 0 && board[row][col])
     }
 }
 

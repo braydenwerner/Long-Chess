@@ -15,6 +15,7 @@ class Room {
 
     addSocket(socket) {
         this.sockets.push(socket);
+        if (this.sockets.length === 1) this.white = this.sockets[0].id;
     }
 
     removeSocket(socket) {
@@ -25,7 +26,6 @@ class Room {
         if (!this.playing && this.sockets.length == 2) {
             this.playing = true;
             this.turn = this.sockets[0].id;
-            this.white = this.sockets[0].id;
         }
     }
 
@@ -38,10 +38,9 @@ class Room {
             || !this.playing
             || this.sockets.length < 2
             || socket.id != this.turn)
-            return socket.emit("/invalidMove");
+            return;
 
         //obtain list of all possible moves for a given piece
-        console.log(this.board.board[moveData.startRow][moveData.startCol]);
         let possibleMoves = this.board.board[moveData.startRow][moveData.startCol].getMoves(this.board.board, moveData.startRow, moveData.startCol);
         console.log(possibleMoves);
 
@@ -54,15 +53,14 @@ class Room {
                 this.turn = (this.turn == this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
             }
         }
-
-        socket.emit("/invalidMove");
     }
 
     serializeForUpdate() {
-        let players = this.sockets.map(socket => { return socket.id });
         return ({
             board: this.board.serializeBoard(),
             whiteID: this.white,
+            turn: this.turn,
+            numPlayers: this.sockets.length,
         });
     }
 }

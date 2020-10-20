@@ -12,7 +12,7 @@ class Pawn {
         let possibleMoves = [];
 
         if (this.color === "White") {
-            if (row - 1 >= 0 && board[row - 1][col] === "empty") {
+            if (row - 1 >= 0 && board[row - 1][col] === "empty" && board[row - 1][col].color != this.color) {
                 possibleMoves.push({
                     row: row - 1,
                     col: col
@@ -20,7 +20,7 @@ class Pawn {
             }
 
             //diagonal left
-            if (row - 1 >= 0 && col - 1 >= 0 && board[row - 1][col - 1] != "empty") {
+            if (row - 1 >= 0 && col - 1 >= 0 && board[row - 1][col - 1] != "empty" && board[row - 1][col - 1].color != this.color) {
                 possibleMoves.push({
                     row: row - 1,
                     col: col - 1
@@ -28,14 +28,14 @@ class Pawn {
             }
 
             //diagonal right
-            if (row - 1 >= 0 && col + 1 < Constants.NUM_TILES_WIDTH && board[row - 1][col + 1] != "empty") {
+            if (row - 1 >= 0 && col + 1 < Constants.NUM_TILES_WIDTH && board[row - 1][col + 1] != "empty" && board[row - 1][col + 1].color != this.color) {
                 possibleMoves.push({
                     row: row - 1,
                     col: col + 1
                 })
             }
         } else {
-            if (row + 1 < Constants.NUM_TILES_HEIGHT && board[row + 1][col] === "empty") {
+            if (row + 1 < Constants.NUM_TILES_HEIGHT && board[row + 1][col] === "empty" && board[row + 1][col].color != this.color) {
                 possibleMoves.push({
                     row: row + 1,
                     col: col
@@ -43,7 +43,7 @@ class Pawn {
             }
 
             //diagonal left
-            if (row + 1 < NUM_TILES_HEIGHT && col - 1 >= 0 && board[row + 1][col - 1] != "empty") {
+            if (row + 1 < NUM_TILES_HEIGHT && col - 1 >= 0 && board[row + 1][col - 1] != "empty" && board[row + 1][col - 1].color != this.color) {
                 possibleMoves.push({
                     row: row + 1,
                     col: col - 1
@@ -51,7 +51,7 @@ class Pawn {
             }
 
             //diagonal right
-            if (row + 1 < NUM_TILES_HEIGHT && col + 1 < Constants.NUM_TILES_WIDTH && board[row + 1][col + 1] != "empty") {
+            if (row + 1 < NUM_TILES_HEIGHT && col + 1 < Constants.NUM_TILES_WIDTH && board[row + 1][col + 1] != "empty" && board[row + 1][col + 1].color != this.color) {
                 possibleMoves.push({
                     row: row + 1,
                     col: col + 1

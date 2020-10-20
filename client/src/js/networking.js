@@ -1,6 +1,5 @@
 import { processGameUpdate } from "./gameUpdate.js";
 import { duplicateRoom, roomFullOrNotExist, noError } from "./app.js";
-import { invalidMove } from "./render.js";
 
 const PORT = "http://localhost:4000";
 export const socket = io(PORT);
@@ -17,7 +16,6 @@ export const connect = () => {
         socket.on("/alreadyExists", duplicateRoom);
         socket.on("/roomFullOrNotExist", roomFullOrNotExist);
         socket.on("/noError", noError);
-        socket.on("/invalidMove", invalidMove);
     });
 }
 
