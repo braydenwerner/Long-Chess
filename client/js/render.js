@@ -32,7 +32,7 @@ export function startRendering() {
 }
 
 export function render() {
-    ctx.fillStyle = "WHITE";
+    ctx.fillStyle = "#292d3e";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     //current socket = socket.id
     //check if current socket matches white
