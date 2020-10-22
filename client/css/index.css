@@ -168,4 +168,11 @@ html, body {
 
 #display {
     display: none;
+    padding: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

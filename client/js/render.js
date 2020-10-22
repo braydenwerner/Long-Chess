@@ -1,5 +1,8 @@
 import { getCurrentState } from "./gameUpdate.js";
-import { NUM_TILES_WIDTH, NUM_TILES_HEIGHT } from "./constantClient.js";
+import {
+    NUM_TILES_WIDTH, NUM_TILES_HEIGHT, PAWN_WIDTH, PAWN_HEIGHT, ROOK_HEIGHT, ROOK_WIDTH, KNIGHT_WIDTH,
+    KNIGHT_HEIGHT, BISHOP_WIDTH, BISHOP_HEIGHT, QUEEN_WIDTH, QUEEN_HEIGHT, KING_WIDTH, KING_HEIGHT
+} from "./constantClient.js";
 import { getImages } from "./assetLoader.js";
 import { socket, sendMove } from "./networking.js";
 
@@ -22,7 +25,7 @@ window.onresize = () => {
 
 function initMapVars() {
     canvas.width = window.innerWidth - 2;
-    canvas.height = window.innerHeight - 2;
+    canvas.height = window.innerHeight - 40;
     tileSize = (canvas.height - 2) / NUM_TILES_HEIGHT;
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
 }
@@ -34,37 +37,32 @@ export function startRendering() {
 export function render() {
     ctx.fillStyle = "#292d3e";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //current socket = socket.id
-    //check if current socket matches white
+
     const { room } = getCurrentState();
     if (!room) return;
     whiteID = room.whiteID;
     board = room.board;
 
-    if (shouldDeselectPiece) {
-        deselectPiece();
-    }
+    if (shouldDeselectPiece) deselectPiece();
 
     //RENDER BOARD AFTER AN UPDATE, RENDER SELECTED PIECE SEPARATELY????
     renderBoard(board);
 
     if (room.numPlayers < 2) renderWaitingForPlayers();
-
-
 }
 
 function renderBoard(board) {
     //render board
-    let color = "WHITE";
+    let color = "#eeeed2";
     for (let i = 0; i < NUM_TILES_HEIGHT; i++) {
         for (let j = 0; j < NUM_TILES_WIDTH; j++) {
             ctx.fillStyle = color;
             ctx.fillRect(j * tileSize + offsetX, i * tileSize, tileSize, tileSize);
 
-            color = (color === "WHITE") ? "GREEN" : "WHITE";
+            color = (color === "#eeeed2") ? "#769656" : "#eeeed2";
         }
 
-        color = (color === "WHITE") ? "GREEN" : "WHITE";
+        color = (color === "#eeeed2") ? "#769656" : "#eeeed2";
     }
 
     //render pieces according to player color. Board is flipped on black
@@ -72,10 +70,34 @@ function renderBoard(board) {
         for (let i = 0; i < NUM_TILES_HEIGHT; i++) {
             for (let j = 0; j < NUM_TILES_WIDTH; j++) {
                 if (board[i][j] != "empty") {
-                    if (i != selectedPiece.row || j != selectedPiece.col)
-                        ctx.drawImage(images[board[i][j]], j * tileSize + offsetX, i * tileSize, tileSize, tileSize);
-                    else
-                        ctx.drawImage(images[board[i][j]], mousePos.xCord, mousePos.yCord, tileSize, tileSize);
+                    if (i != selectedPiece.row || j != selectedPiece.col) {
+                        //center point pawnWidth / 2 + tileSize / 2 
+                        if (board[i][j].indexOf("pawn") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - PAWN_WIDTH / 2, i * tileSize + tileSize / 2 - PAWN_HEIGHT / 2, PAWN_WIDTH, PAWN_HEIGHT);
+                        else if (board[i][j].indexOf("rook") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - ROOK_WIDTH / 2, i * tileSize + tileSize / 2 - ROOK_HEIGHT / 2, ROOK_WIDTH, ROOK_HEIGHT);
+                        else if (board[i][j].indexOf("knight") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - KNIGHT_WIDTH / 2, i * tileSize + tileSize / 2 - KNIGHT_HEIGHT / 2, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                        else if (board[i][j].indexOf("bishop") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - BISHOP_WIDTH / 2, i * tileSize + tileSize / 2 - BISHOP_HEIGHT / 2, BISHOP_WIDTH, BISHOP_HEIGHT);
+                        else if (board[i][j].indexOf("king") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - KING_WIDTH / 2, i * tileSize + tileSize / 2 - KING_HEIGHT / 2, KING_WIDTH, KING_HEIGHT);
+                        else if (board[i][j].indexOf("queen") >= 0)
+                            ctx.drawImage(images[board[i][j]], j * tileSize + offsetX + tileSize / 2 - QUEEN_WIDTH / 2, i * tileSize + tileSize / 2 - QUEEN_HEIGHT / 2, QUEEN_WIDTH, QUEEN_HEIGHT);
+                    } else {
+                        if (board[i][j].indexOf("pawn") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + PAWN_WIDTH / 2, mousePos.yCord, PAWN_WIDTH, PAWN_HEIGHT);
+                        else if (board[i][j].indexOf("rook") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + ROOK_WIDTH / 2, mousePos.yCord, ROOK_WIDTH, ROOK_HEIGHT);
+                        else if (board[i][j].indexOf("knight") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + KNIGHT_WIDTH / 2, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                        else if (board[i][j].indexOf("bishop") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + BISHOP_WIDTH / 2, mousePos.yCord, BISHOP_WIDTH, BISHOP_HEIGHT);
+                        else if (board[i][j].indexOf("king") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + KING_WIDTH / 2, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
+                        else if (board[i][j].indexOf("queen") >= 0)
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + QUEEN_WIDTH / 2, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
+                    }
                 }
             }
         }
@@ -84,10 +106,33 @@ function renderBoard(board) {
         for (let i = 0; i < NUM_TILES_HEIGHT; i++) {
             for (let j = 0; j < NUM_TILES_WIDTH; j++) {
                 if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j] != "empty") {
-                    if (i != NUM_TILES_HEIGHT - 1 - selectedPiece.row || j != NUM_TILES_WIDTH - 1 - selectedPiece.col)
-                        ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX, i * tileSize, tileSize, tileSize);
-                    else
-                        ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord, mousePos.yCord, tileSize, tileSize);
+                    if (i != NUM_TILES_HEIGHT - 1 - selectedPiece.row || j != NUM_TILES_WIDTH - 1 - selectedPiece.col) {
+                        if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("pawn") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - PAWN_WIDTH / 2, i * tileSize + tileSize / 2 - PAWN_HEIGHT / 2, PAWN_WIDTH, PAWN_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("rook") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - ROOK_WIDTH / 2, i * tileSize + tileSize / 2 - ROOK_HEIGHT / 2, ROOK_WIDTH, ROOK_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("knight") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - KNIGHT_WIDTH / 2, i * tileSize + tileSize / 2 - KNIGHT_HEIGHT / 2, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("bishop") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - BISHOP_WIDTH / 2, i * tileSize + tileSize / 2 - BISHOP_HEIGHT / 2, BISHOP_WIDTH, BISHOP_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("king") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - KING_WIDTH / 2, i * tileSize + tileSize / 2 - KING_HEIGHT / 2, KING_WIDTH, KING_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("queen") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], j * tileSize + offsetX + tileSize / 2 - QUEEN_WIDTH / 2, i * tileSize + tileSize / 2 - QUEEN_HEIGHT / 2, QUEEN_WIDTH, QUEEN_HEIGHT);
+                    } else {
+                        if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("pawn") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + PAWN_WIDTH / 2, mousePos.yCord, PAWN_WIDTH, PAWN_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("rook") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + ROOK_WIDTH / 2, mousePos.yCord, ROOK_WIDTH, ROOK_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("knight") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + KNIGHT_WIDTH / 2, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("bishop") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + BISHOP_WIDTH / 2, mousePos.yCord, BISHOP_WIDTH, BISHOP_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("king") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + KING_WIDTH / 2, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
+                        else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("queen") >= 0)
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + QUEEN_WIDTH / 2, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
+                    }
                 }
             }
         }

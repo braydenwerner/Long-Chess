@@ -31,7 +31,6 @@ createRoomInput.onkeyup = e => {
 }
 
 closeCreateRoomPopup.onclick = () => {
-    console.log("r");
     createRoomPopupOverlay.style.display = "none";
 }
 

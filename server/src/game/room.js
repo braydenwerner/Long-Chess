@@ -55,7 +55,6 @@ class Room {
 
         //obtain a list of all possible moves of the selected piece and make move if valid
         let possibleMoves = this.board.board[moveData.startRow][moveData.startCol].getMoves(this.board.board, moveData.startRow, moveData.startCol);
-        console.log(possibleMoves);
         for (let i = 0; i < possibleMoves.length; i++) {
             if (possibleMoves[i].col === moveData.endCol && possibleMoves[i].row === moveData.endRow) {
                 this.board.board[moveData.endRow][moveData.endCol] = this.board.board[moveData.startRow][moveData.startCol];
