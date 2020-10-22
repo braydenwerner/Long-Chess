@@ -1,8 +1,9 @@
 const Constants = require("../../../constantServer.js");
+const ChessPiece = require("./chessPiece.js");
 
-class Rook {
+class Rook extends ChessPiece {
     constructor(color) {
-        this.color = color;
+        super(color);
     }
 
     getMoves(board, row, col) {

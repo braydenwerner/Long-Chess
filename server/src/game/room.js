@@ -1,5 +1,6 @@
 const Board = require("./board");
 const Constants = require("../../constantServer.js");
+const King = require("./pieces/king");
 
 class Room {
     constructor(roomName) {
@@ -40,19 +41,78 @@ class Room {
             || socket.id != this.turn)
             return;
 
-        //obtain list of all possible moves for a given piece
+        //create a temporary board to faciliatate undoing a move if it puts own king into check.
+        let tempBoard = new Array(Constants.NUM_TILES_HEIGHT);
+        for (let i = 0; i < tempBoard.length; i++) {
+            tempBoard[i] = new Array(Constants.NUM_TILES_WIDTH);
+        }
+
+        for (let i = 0; i < tempBoard.length; i++) {
+            for (let j = 0; j < tempBoard[0].length; j++) {
+                tempBoard[i][j] = this.board.board[i][j];
+            }
+        }
+
+        //obtain a list of all possible moves of the selected piece and make move if valid
         let possibleMoves = this.board.board[moveData.startRow][moveData.startCol].getMoves(this.board.board, moveData.startRow, moveData.startCol);
         console.log(possibleMoves);
-
-        //if possibleMoves contains move moveData.endRow, moveData.endCol, move is valid
-        //else not valid
         for (let i = 0; i < possibleMoves.length; i++) {
             if (possibleMoves[i].col === moveData.endCol && possibleMoves[i].row === moveData.endRow) {
                 this.board.board[moveData.endRow][moveData.endCol] = this.board.board[moveData.startRow][moveData.startCol];
                 this.board.board[moveData.startRow][moveData.startCol] = "empty";
-                this.turn = (this.turn == this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+                this.turn = (this.turn === this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
             }
         }
+
+        this.checkForCheckmate();
+
+        //if player moves piece and is in check at end of turn, undo the move
+        //find opposite color because already switched turn, have to revert back
+        if (this.turn === this.sockets[0].id && this.kingInCheck("Black")) this.undoMove(tempBoard);
+        if (this.turn === this.sockets[1].id && this.kingInCheck("White")) this.undoMove(tempBoard);
+    }
+
+
+    undoMove(tempBoard) {
+        this.board.board = tempBoard;
+        this.turn = (this.turn == this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+    }
+
+    checkForCheckmate() {
+
+    }
+
+    findKingPosition(color) {
+        for (let i = 0; i < this.board.board.length; i++) {
+            for (let j = 0; j < this.board.board[0].length; j++) {
+                if (this.board.board[i][j] != "empty" && this.board.board[i][j].color === color && this.board.board[i][j] instanceof King) {
+                    return { row: i, col: j };
+                }
+            }
+        }
+    }
+
+    kingInCheck(color) {
+        let threatenedSquares = [];
+        let kingInCheck = false;
+        let oppositeColor = (color === "White") ? "Black" : "White";
+        let kingPos = this.findKingPosition(color);
+
+        for (let i = 0; i < this.board.board.length; i++) {
+            for (let j = 0; j < this.board.board[0].length; j++) {
+                if (this.board.board != "empty" && this.board.board[i][j].color === oppositeColor && !(this.board.board[i][j] instanceof King)) {
+                    threatenedSquares.push(this.board.board[i][j].getMoves(this.board.board, i, j));
+                }
+            }
+        }
+
+        threatenedSquares.forEach(moves => {
+            moves.forEach(square => {
+                if (square.row === kingPos.row && square.col === kingPos.col) kingInCheck = true;
+            });
+        });
+
+        return kingInCheck;
     }
 
     serializeForUpdate() {

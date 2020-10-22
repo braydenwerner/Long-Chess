@@ -45,6 +45,7 @@ export function render() {
         deselectPiece();
     }
 
+    //RENDER BOARD AFTER AN UPDATE, RENDER SELECTED PIECE SEPARATELY????
     renderBoard(board);
 
     if (room.numPlayers < 2) renderWaitingForPlayers();

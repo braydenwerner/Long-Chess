@@ -1,8 +1,9 @@
 const Constants = require("../../../constantServer.js");
+const ChessPiece = require("./chessPiece.js");
 
-class Knight {
+class Knight extends ChessPiece {
     constructor(color) {
-        this.color = color;
+        super(color);
     }
 
     //if not out of bounds, can jump 8 directions
