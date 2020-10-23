@@ -31,3 +31,7 @@ export const joinRoom = roomName => {
 export const sendMove = moveData => {
     socket.emit("/sendMove", moveData)
 }
+
+export const selectPiece = (piece) => {
+    socket.emit("/selectPiece", piece);
+}

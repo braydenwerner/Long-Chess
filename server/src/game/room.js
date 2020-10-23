@@ -39,11 +39,6 @@ class Room {
     }
 
     makeMove(socket, moveData) {
-        //set unselected for client to stop rendering the selected piece
-        if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
-        else this.selectedPieceBlack = -1;
-
-
         //return if out of bounds, not playing, choose empty piece,
         // not enough players, not player's turn
         if (moveData.endRow < 0 || moveData.endRow >= Constants.NUM_TILES_HEIGHT
@@ -51,8 +46,11 @@ class Room {
             || this.board.board[moveData.startRow][moveData.startCol] === "empty"
             || !this.playing
             || this.sockets.length < 2
-            || socket.id != this.turn)
+            || socket.id != this.turn) {
+            if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
+            else this.selectedPieceBlack = -1;
             return;
+        }
 
         //create a temporary board to faciliatate undoing a move if it puts own king into check.
         let tempBoard = new Array(Constants.NUM_TILES_HEIGHT);
@@ -82,6 +80,9 @@ class Room {
         //find opposite color because already switched turn, have to revert back
         if (this.turn === this.sockets[0].id && this.kingInCheck("Black")) this.undoMove(tempBoard);
         if (this.turn === this.sockets[1].id && this.kingInCheck("White")) this.undoMove(tempBoard);
+
+        if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
+        else this.selectedPieceBlack = -1;
     }
 
 

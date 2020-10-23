@@ -4,7 +4,7 @@ import {
     KNIGHT_HEIGHT, BISHOP_WIDTH, BISHOP_HEIGHT, QUEEN_WIDTH, QUEEN_HEIGHT, KING_WIDTH, KING_HEIGHT
 } from "./constantClient.js";
 import { getImages } from "./assetLoader.js";
-import { socket, sendMove } from "./networking.js";
+import { socket, sendMove, selectPiece } from "./networking.js";
 
 const canvas = document.getElementById("display");
 const ctx = canvas.getContext("2d");
@@ -12,11 +12,10 @@ const images = getImages();
 
 export let tileSize;
 export let offsetX;
-export let selectedPiece = -1;
 let mousePos;
 let whiteID;
 let board;
-let shouldDeselectPiece = false;
+let selectedPiece;
 
 initMapVars();
 window.onresize = () => {
@@ -43,10 +42,11 @@ export function render() {
     whiteID = room.whiteID;
     board = room.board;
 
-    if (shouldDeselectPiece) deselectPiece();
+    if (whiteID === socket.id) selectedPiece = room.selectedPieceWhite;
+    else selectedPiece = room.selectedPieceBlack;
 
     //RENDER BOARD AFTER AN UPDATE, RENDER SELECTED PIECE SEPARATELY????
-    renderBoard(board);
+    renderBoard(room.board);
 
     if (room.numPlayers < 2) renderWaitingForPlayers();
 }
@@ -143,7 +143,7 @@ let renderWaitingForPlayersAnimation = 0;
 let renderTextIndex = 0;
 function renderWaitingForPlayers() {
     ctx.fillStyle = "BLACK";
-    ctx.font = "32px Corrier";
+    ctx.font = "28px Corrier";
     ctx.textAlign = "center";
 
     let texts = ["Waiting for Opponent to Connect", "Waiting for Opponent to Connect.", "Waiting for Opponent to Connect..", "Waiting for Opponent to Connect..."];
@@ -160,18 +160,22 @@ export function mouseDown(e) {
     //only select own color. If black, since board is flipped, selected piece if opposite
     if (row >= 0 && col >= 0 && row < NUM_TILES_HEIGHT && col < NUM_TILES_WIDTH) {
         if (board[row][col].indexOf("White") >= 0 && whiteID === socket.id) {
-            selectedPiece = { row: row, col: col }
+            selectPiece({
+                row: row,
+                col: col
+            });
         } else if (board[NUM_TILES_HEIGHT - 1 - row][NUM_TILES_WIDTH - 1 - col].indexOf("Black") >= 0 && whiteID != socket.id) {
-            selectedPiece = {
+            selectPiece({
                 row: NUM_TILES_HEIGHT - 1 - row,
                 col: NUM_TILES_WIDTH - 1 - col
-            }
+            })
         }
     }
 }
 
 //send start and ending location to server set selected piece to -1
 export function mouseUp(e) {
+    //the server will automatically unselect piece
     let row = Math.floor((mousePos.yCord + tileSize / 2) / tileSize);
     let col = Math.floor((mousePos.xCord - offsetX + tileSize / 2) / tileSize);
 
@@ -194,15 +198,8 @@ export function mouseUp(e) {
             });
         }
     }
-
-    shouldDeselectPiece = true;
 }
 
 export function mouseMove(e) {
     mousePos = { xCord: e.clientX - tileSize / 2, yCord: e.clientY - tileSize / 2 };
-}
-
-export function deselectPiece() {
-    selectedPiece = -1;
-    shouldDeselectPiece = false;
 }
