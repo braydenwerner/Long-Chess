@@ -22,7 +22,7 @@ class Game {
       const room = this.rooms[roomID];
 
       room.sockets.map(s => {
-        if (socket == s) room.removeSocket(socket);
+        if (socket === s) room.removeSocket(socket);
       });
     });
   }
@@ -32,7 +32,17 @@ class Game {
       const room = this.rooms[roomID];
 
       room.sockets.map(s => {
-        if (socket == s) room.makeMove(socket, moveData);
+        if (socket === s) room.makeMove(socket, moveData);
+      });
+    });
+  }
+
+  selectPiece(socket, piece) {
+    Object.keys(this.rooms).forEach(roomID => {
+      const room = this.rooms[roomID];
+
+      room.sockets.map(s => {
+        if (socket === s) room.selectPiece(socket, piece);
       });
     });
   }
@@ -42,7 +52,7 @@ class Game {
     Object.keys(this.rooms).forEach(roomID => {
       const room = this.rooms[roomID];
 
-      if (room.sockets.length == 0) delete this.rooms[room.roomName];
+      if (room.sockets.length === 0) delete this.rooms[room.roomName];
     });
 
     //update each room

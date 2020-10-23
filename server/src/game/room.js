@@ -7,6 +7,9 @@ class Room {
         this.roomName = roomName;
         this.sockets = [];
 
+        this.selectedPieceWhite = -1;
+        this.selectedPieceBlack = -1;
+
         this.playing = false;
         this.turn;
         this.white;
@@ -30,7 +33,17 @@ class Room {
         }
     }
 
+    selectPiece(socket, piece) {
+        if (this.playing && socket.id === this.sockets[0].id) this.selectedPieceWhite = piece;
+        else if (this.playing && socket.id === this.sockets[1].id) this.selectedPieceBlack = piece;
+    }
+
     makeMove(socket, moveData) {
+        //set unselected for client to stop rendering the selected piece
+        if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
+        else this.selectedPieceBlack = -1;
+
+
         //return if out of bounds, not playing, choose empty piece,
         // not enough players, not player's turn
         if (moveData.endRow < 0 || moveData.endRow >= Constants.NUM_TILES_HEIGHT
@@ -99,7 +112,7 @@ class Room {
 
         for (let i = 0; i < this.board.board.length; i++) {
             for (let j = 0; j < this.board.board[0].length; j++) {
-                if (this.board.board != "empty" && this.board.board[i][j].color === oppositeColor && !(this.board.board[i][j] instanceof King)) {
+                if (this.board.board != "empty" && this.board.board[i][j].color === oppositeColor) {
                     threatenedSquares.push(this.board.board[i][j].getMoves(this.board.board, i, j));
                 }
             }
@@ -120,6 +133,8 @@ class Room {
             whiteID: this.white,
             turn: this.turn,
             numPlayers: this.sockets.length,
+            selectedPieceWhite: this.selectedPieceWhite,
+            selectedPieceBlack: this.selectedPieceBlack
         });
     }
 }

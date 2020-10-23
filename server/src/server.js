@@ -36,6 +36,10 @@ io.on("connection", socket => {
     game.sendMove(socket, moveData);
   });
 
+  socket.on("/selectPiece", (piece) => {
+    game.selectPiece(socket, piece);
+  });
+
   socket.on("disconnect", () => {
     game.removeSocket(socket);
   });
