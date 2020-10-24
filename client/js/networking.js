@@ -1,8 +1,8 @@
 import { processGameUpdate } from "./gameUpdate.js";
 import { duplicateRoom, roomFullOrNotExist, noError, whiteWins, blackWins } from "./app.js";
 
-//const PORT = "https://long-chess.herokuapp.com/";
-const PORT = "http://localhost:4000";
+const PORT = "https://long-chess.herokuapp.com/";
+//const PORT = "http://localhost:4000";
 export const socket = io(PORT);
 
 const connectedPromise = new Promise((resolve => {
