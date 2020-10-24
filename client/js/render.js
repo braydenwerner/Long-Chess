@@ -29,8 +29,13 @@ function initMapVars() {
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
 }
 
+let interval;
 export function startRendering() {
-    setInterval(render, 1000 / 60);
+    interval = setInterval(render, 1000 / 60);
+}
+
+export function stopRendering() {
+    clearInterval(interval);
 }
 
 export function render() {
@@ -47,6 +52,7 @@ export function render() {
 
     //RENDER BOARD AFTER AN UPDATE, RENDER SELECTED PIECE SEPARATELY????
     renderBoard(room.board);
+    renderBorderAroundPotentialMove();
 
     if (room.numPlayers < 2) renderWaitingForPlayers();
 }
@@ -90,13 +96,13 @@ function renderBoard(board) {
                         else if (board[i][j].indexOf("rook") >= 0)
                             ctx.drawImage(images[board[i][j]], mousePos.xCord + ROOK_WIDTH / 2, mousePos.yCord, ROOK_WIDTH, ROOK_HEIGHT);
                         else if (board[i][j].indexOf("knight") >= 0)
-                            ctx.drawImage(images[board[i][j]], mousePos.xCord + KNIGHT_WIDTH / 2, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + KNIGHT_WIDTH / 2 - 10, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
                         else if (board[i][j].indexOf("bishop") >= 0)
                             ctx.drawImage(images[board[i][j]], mousePos.xCord + BISHOP_WIDTH / 2, mousePos.yCord, BISHOP_WIDTH, BISHOP_HEIGHT);
                         else if (board[i][j].indexOf("king") >= 0)
-                            ctx.drawImage(images[board[i][j]], mousePos.xCord + KING_WIDTH / 2, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + 15, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
                         else if (board[i][j].indexOf("queen") >= 0)
-                            ctx.drawImage(images[board[i][j]], mousePos.xCord + QUEEN_WIDTH / 2, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
+                            ctx.drawImage(images[board[i][j]], mousePos.xCord + 15, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
                     }
                 }
             }
@@ -125,13 +131,13 @@ function renderBoard(board) {
                         else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("rook") >= 0)
                             ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + ROOK_WIDTH / 2, mousePos.yCord, ROOK_WIDTH, ROOK_HEIGHT);
                         else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("knight") >= 0)
-                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + KNIGHT_WIDTH / 2, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + KNIGHT_WIDTH / 2 - 10, mousePos.yCord, KNIGHT_WIDTH, KNIGHT_HEIGHT);
                         else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("bishop") >= 0)
                             ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + BISHOP_WIDTH / 2, mousePos.yCord, BISHOP_WIDTH, BISHOP_HEIGHT);
                         else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("king") >= 0)
-                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + KING_WIDTH / 2, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + 15, mousePos.yCord, KING_WIDTH, KING_HEIGHT);
                         else if (board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j].indexOf("queen") >= 0)
-                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + QUEEN_WIDTH / 2, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
+                            ctx.drawImage(images[board[NUM_TILES_HEIGHT - 1 - i][NUM_TILES_WIDTH - 1 - j]], mousePos.xCord + 15, mousePos.yCord, QUEEN_WIDTH, QUEEN_HEIGHT);
                     }
                 }
             }
@@ -169,6 +175,19 @@ export function mouseDown(e) {
                 row: NUM_TILES_HEIGHT - 1 - row,
                 col: NUM_TILES_WIDTH - 1 - col
             })
+        }
+    }
+}
+
+function renderBorderAroundPotentialMove() {
+    if (selectedPiece != -1) {
+        let row = Math.floor((mousePos.yCord + tileSize / 2) / tileSize);
+        let col = Math.floor((mousePos.xCord - offsetX + tileSize / 2) / tileSize);
+
+        if (row >= 0 && row < NUM_TILES_HEIGHT && col >= 0 && col < NUM_TILES_WIDTH) {
+            ctx.beginPath();
+            ctx.rect(col * tileSize + offsetX, row * tileSize, tileSize, tileSize);
+            ctx.stroke();
         }
     }
 }

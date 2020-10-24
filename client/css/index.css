@@ -135,7 +135,6 @@ html, body {
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    ;
 }
 
 #joinRoomContainer {
@@ -175,4 +174,51 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#winScreenPopupOverlay {
+    animation: fade-in 2.5s ease;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#winContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 400px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#winMessage {
+    font-family: 'Tangerine', bold;
+    font-size: 60px;
+    border: none;
+    outline: none;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+}
+
+#backToHomeButton {
+    border: none;
+    outline: none;
+    text-align: center;
+    padding: 5px;
+    width: 50%;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(41, 45, 62);
 }

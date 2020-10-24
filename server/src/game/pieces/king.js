@@ -73,35 +73,6 @@ class King extends ChessPiece {
             });
         }
 
-        //find all threatened squares
-        let threatenedSquares = [];
-        if (this.color === "White") {
-            for (let i = 0; i < board.length; i++) {
-                for (let j = 0; j < board[0].length; j++) {
-                    if (board != "empty" && board[i][j].color === "Black" && !(board[i][j] instanceof King))
-                        threatenedSquares.push(board[i][j].getMoves(board, i, j));
-                }
-            }
-        } else {
-            for (let i = 0; i < board.length; i++) {
-                for (let j = 0; j < board[0].length; j++) {
-                    if (board != "empty" && board[i][j].color === "White" && !(board[i][j] instanceof King))
-                        threatenedSquares.push(board[i][j].getMoves(board, i, j));
-                }
-            }
-        }
-
-        threatenedSquares.forEach(moves => {
-            moves.forEach(square => {
-                for (let i = 0; i < possibleMoves.length; i++) {
-                    if (possibleMoves.row === square.row && possibleMoves.col === square.col) {
-                        possibleMoves.splice(i, 1);
-                        i--;
-                    }
-                }
-            });
-        });
-
         return possibleMoves;
     }
 }

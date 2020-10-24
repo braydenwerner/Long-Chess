@@ -1,7 +1,7 @@
 import { connect, createRoom, joinRoom } from "./networking.js";
-import { startCaptureInput } from "./input.js"
+import { startCaptureInput, stopCaptureInput } from "./input.js"
 import { downloadImages } from "./assetLoader.js";
-import { startRendering } from "./render.js";
+import { startRendering, stopRendering } from "./render.js";
 
 const joinContainer = document.getElementById("joinContainer");
 const createRoomButton = document.getElementById("createRoomButton");
@@ -15,6 +15,11 @@ const closeCreateRoomPopup = document.getElementById("closeCreateRoomPopup");
 const joinRoomPopupOverlay = document.getElementById("joinRoomPopupOverlay");
 const joinRoomInput = document.getElementById("joinRoomInput");
 const closeJoinRoomPopup = document.getElementById("closeJoinRoomPopup");
+
+const winScreenPopupOverlay = document.getElementById("winScreenPopupOverlay");
+const winMessage = document.getElementById("winMessage");
+const backToHomeButton = document.getElementById("backToHomeButton");
+//const rematchButton = document.getElementById("rematchButton");
 
 Promise.all([connect(), downloadImages()]);
 
@@ -57,13 +62,11 @@ function startGame(room, joinOption) {
 
 export function duplicateRoom() {
     display.style.display = "none";
-    createRoomPopupOverlay.style.display = "initial";
     alert("Room already exists!");
 }
 
 export function roomFullOrNotExist() {
     display.style.display = "none";
-    createRoomPopupOverlay.style.display = "initial";
     alert("Room is full or does not exist!");
 }
 
@@ -74,6 +77,31 @@ export function noError() {
 
     startCaptureInput();
     startRendering();
+}
+
+backToHomeButton.onclick = () => {
+    location.reload();
+}
+
+// //if rematch, clear popup, send socket request to reset room
+// rematchButton.onclick = () => {
+//     startCaptureInput();
+
+//     winScreenOverlay.style.display = "none";
+// }
+
+export function whiteWins() {
+    stopCaptureInput();
+    winScreenPopupOverlay.style.display = "initial";
+    winMessage.innerText = "White Wins";
+
+    console.log("White wins reached");
+}
+
+export function blackWins() {
+    stopCaptureInput();
+    winScreenPopupOverlay.style.display = "initial";
+    winMessage.innerText = "Black Wins";
 }
 
 
