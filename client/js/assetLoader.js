@@ -30,3 +30,23 @@ function downloadImage(imageName) {
 
 export const downloadImages = () => downloadPromiseImage;
 export const getImages = () => images;
+
+const AUDIO_FILES = [
+    "game-start.wav",
+    "move-piece.wav",
+];
+
+const audioObject = {};
+const downloadPromiseAudio = Promise.all(AUDIO_FILES.map(downloadAudio));
+
+function downloadAudio(audioName) {
+    return new Promise((resolve) => {
+        const audio = new Audio();
+        audioObject[audioName] = audio;
+        audio.src = `./audio/${audioName}`;
+        resolve();
+    });
+}
+
+export const downloadAudios = () => downloadPromiseAudio;
+export const getAudio = () => audioObject;

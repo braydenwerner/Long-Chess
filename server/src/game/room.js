@@ -30,6 +30,9 @@ class Room {
         if (!this.playing && this.sockets.length == 2) {
             this.playing = true;
             this.turn = this.sockets[0].id;
+
+            this.sockets[0].emit("/gameStartAudio");
+            this.sockets[1].emit("/gameStartAudio");
         }
     }
 
@@ -95,6 +98,10 @@ class Room {
         if (this.turn === this.sockets[0].id && inCheckBlack) this.undoMove(tempBoard);
         if (this.turn === this.sockets[1].id && inCheckWhite) this.undoMove(tempBoard);
 
+        //play move audio
+        this.sockets[0].emit("/movePieceAudio");
+        this.sockets[1].emit("/movePieceAudio");
+
         if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
         else this.selectedPieceBlack = -1;
     }
@@ -136,7 +143,7 @@ class Room {
                             for (let j = 0; j < tempBoard[0].length; j++) {
                                 tempBoard[i][j] = this.board.board[i][j];
                             }
-                        };
+                        }
                     }
                 }
             }

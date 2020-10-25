@@ -1,6 +1,6 @@
 import { connect, createRoom, joinRoom } from "./networking.js";
 import { startCaptureInput, stopCaptureInput } from "./input.js"
-import { downloadImages } from "./assetLoader.js";
+import { downloadAudios, downloadImages } from "./assetLoader.js";
 import { startRendering, stopRendering } from "./render.js";
 
 const joinContainer = document.getElementById("joinContainer");
@@ -21,7 +21,7 @@ const winMessage = document.getElementById("winMessage");
 const backToHomeButton = document.getElementById("backToHomeButton");
 //const rematchButton = document.getElementById("rematchButton");
 
-Promise.all([connect(), downloadImages()]);
+Promise.all([connect(), downloadImages(), downloadAudios()]);
 
 createRoomButton.onclick = () => {
     createRoomPopupOverlay.style.display = "initial";
