@@ -114,10 +114,10 @@ html, body {
 
 #createRoomContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     position: fixed;
-    width: 300px;
-    height: 100px;
+    width: 500px;
+    height: 500px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -125,19 +125,42 @@ html, body {
     align-items: center;
     text-align: center;
     border-radius: 20px;
+    justify-content: space-around;
+}
+
+#longChessImage {
+    position: absolute;
+    left: 50px;
+    top: 25px;
+}
+
+#inputField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#createRoomCodeText {
+    margin-top: 55%;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+}
+
+#submitCreateRoomButton {
+    width: 88%;
+    padding: 5px;
 }
 
 #createRoomInput {
     border: none;
     outline: none;
     text-align: center;
-    margin-top: 5%;
     padding: 5px;
-    width: 50%;
 }
 
 #closeCreateRoomPopup {
-    margin-top: 10px;
+    margin-top: 80%;
+    width: 25px;
 }
 
 #joinRoomPopupOverlay {
