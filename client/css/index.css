@@ -12,7 +12,6 @@ html, body {
     align-items: center;
     background-color: rgb(31, 35, 42);
     width: 100%;
-    height: 100%;
     justify-content: space-around;
     align-items: center;
 }
@@ -20,152 +19,190 @@ html, body {
 #playOptions {
     justify-content: space-around;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 50%;
     text-align: center;
     align-items: center;
+    margin-top: 3%;
 }
 
 @media (max-width: 500px) {
     #mainHeader {
-        font-family: 'Tangerine', cursive;
-        font-size: 60px;
-        color: rgb(199, 146, 234);
-        margin-top: 0;
-        margin-bottom: 0;
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 80px;
+        color: rgb(255, 255, 255);
+        margin-top: 15%;
+        margin-bottom: 1%;
+    }
+    #subHeader {
+        color: rgb(200, 200, 200);
     }
     #createRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 10px;
-        text-align: left;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
-        margin-bottom: 2%;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 10%;
+        width: 80%;
     }
     #joinRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 10px;
-        text-align: left;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 10%;
+        width: 80%;
     }
 }
 
 @media (min-width: 500px) {
     #mainHeader {
-        font-family: 'Tangerine', cursive;
+        font-family: 'Fjalla One', sans-serif;
         font-size: 100px;
-        color: rgb(199, 146, 234);
-        margin-top: 0;
+        color: rgb(255, 255, 255);
+        margin-top: 15%;
         margin-bottom: 0;
     }
+    #subHeader {
+        color: rgb(200, 200, 200);
+    }
     #createRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 15px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
-        margin-bottom: 2%;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 8%;
+        width: 55%;
     }
     #joinRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 15px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 8%;
+        width: 55%;
     }
 }
 
 @media (min-width: 900px) {
     #mainHeader {
-        font-family: 'Tangerine', cursive;
+        font-family: 'Fjalla One', sans-serif;
         font-size: 140px;
-        color: rgb(199, 146, 234);
-        margin-top: 0;
+        color: rgb(255, 255, 255);
+        margin-top: 15%;
         margin-bottom: 0;
     }
+    #subHeader {
+        color: rgb(200, 200, 200);
+    }
     #createRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 20px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
-        margin-bottom: 2%;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 4%;
+        width: 35%;
     }
     #joinRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 20px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 4%;
+        width: 35%;
     }
 }
 
 @media (min-width: 1200px) {
     #mainHeader {
-        font-family: 'Tangerine', cursive;
+        font-family: 'Fjalla One', sans-serif;
         font-size: 180px;
         color: rgb(255, 255, 255);
-        margin-top: 0;
+        margin-top: 10%;
         margin-bottom: 0;
     }
+    #subHeader {
+        color: rgb(200, 200, 200);
+    }
     #createRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 300;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 25px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
         margin-bottom: 2%;
+        width: 25%;
     }
     #joinRoomButton {
-        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        color: #fbfbfb;
-        font-weight: 00;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 25px;
-        cursor: pointer;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
         outline: none;
-        padding: 5px;
-        margin-bottom: 2%;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 5%;
+        width: 25%;
     }
 }
 
@@ -207,19 +244,77 @@ html, body {
         align-items: center;
     }
     #submitCreateRoomButton {
-        width: 87%;
-        padding: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
+        outline: none;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 5%;
+        width: 90%;
     }
     #createRoomInput {
         border: none;
         outline: none;
         text-align: center;
         padding: 5px;
-        width: 80%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 18px;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 5%;
+        width: 90%;
     }
     #closeCreateRoomPopup {
-        margin-top: 40%;
+        margin-top: 20%;
         width: 20px;
+    }
+    #joinRoomContainer {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 70%;
+        height: 15%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(53, 53, 53);
+        align-items: center;
+        text-align: center;
+        border-radius: 10px;
+    }
+    #joinRoomInput {
+        border: none;
+        outline: none;
+        text-align: center;
+        padding: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 22px;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-top: 10%;
+        width: 70%;
+    }
+    #closeJoinRoomPopup {
+        width: 20px;
+        height: 20px;
+        margin-top: 2%;
     }
 }
 
@@ -245,29 +340,83 @@ html, body {
         width: 230px;
         height: 463px;
     }
-    #createRoomCodeText {
-        margin-top: 55%;
-        color: rgb(255, 255, 255);
-        font-size: 35px;
-    }
     #inputField {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    #submitCreateRoomButton {
-        width: 84%;
-        padding: 5px;
     }
     #createRoomInput {
         border: none;
         outline: none;
         text-align: center;
         padding: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 22px;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 5%;
+        width: 100%;
+    }
+    #submitCreateRoomButton {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: rgb(133, 170, 83);
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
+        outline: none;
+        box-shadow: 0px 5px rgb(83, 113, 51);
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-bottom: 5%;
+        width: 100%;
     }
     #closeCreateRoomPopup {
-        margin-top: 80%;
+        margin-top: 20%;
         width: 25px;
+    }
+    #joinRoomContainer {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 20%;
+        height: 15%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(53, 53, 53);
+        align-items: center;
+        text-align: center;
+        border-radius: 10px;
+    }
+    #joinRoomInput {
+        border: none;
+        outline: none;
+        text-align: center;
+        padding: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 22px;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-stretch: 100%;
+        margin-top: 10%;
+        width: 70%;
+    }
+    #closeJoinRoomPopup {
+        width: 25px;
+        height: 25px;
+        margin-top: 3%;
     }
 }
 
@@ -279,36 +428,6 @@ html, body {
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.6);
-}
-
-#joinRoomContainer {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    width: 250px;
-    height: 75px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(53, 53, 53);
-    align-items: center;
-    text-align: center;
-    border-radius: 10px;
-}
-
-#joinRoomInput {
-    border: none;
-    outline: none;
-    text-align: center;
-    margin-top: 5%;
-    padding: 5px;
-    width: 50%;
-}
-
-#closeJoinRoomPopup {
-    width: 25px;
-    height: 25px;
-    margin-top: 1%;
 }
 
 #display {
