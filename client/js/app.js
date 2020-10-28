@@ -22,6 +22,8 @@ const winMessage = document.getElementById("winMessage");
 const backToHomeButton = document.getElementById("backToHomeButton");
 //const rematchButton = document.getElementById("rematchButton");
 
+const winImage = document.getElementById("winImage");
+
 Promise.all([connect(), downloadImages(), downloadAudios()]);
 
 createRoomButton.onclick = () => {
@@ -103,8 +105,6 @@ export function whiteWins() {
     stopCaptureInput();
     winScreenPopupOverlay.style.display = "initial";
     winMessage.innerText = "White Wins";
-
-    console.log("White wins reached");
 }
 
 export function blackWins() {

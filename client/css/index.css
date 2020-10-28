@@ -461,31 +461,37 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 255, 255);
-    align-items: center;
+    background-color: rgb(53, 53, 53);
     text-align: center;
     border-radius: 20px;
+    align-items: center;
 }
 
 #winMessage {
-    font-family: 'Tangerine', bold;
-    font-size: 60px;
-    border: none;
-    outline: none;
-    text-align: center;
-    padding: 5px;
-    width: 100%;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 55px;
+    color: rgb(255, 255, 255);
+    margin-top: 10%;
+    margin-bottom: 0;
 }
 
+#winImage {}
+
 #backToHomeButton {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(133, 170, 83);
     border: none;
-    outline: none;
-    text-align: center;
-    padding: 5px;
-    width: 50%;
-    border-radius: 25px;
+    border-radius: 5px;
+    padding: 10px;
     color: rgb(255, 255, 255);
-    background-color: rgb(41, 45, 62);
+    font-size: 22px;
+    outline: none;
+    box-shadow: 0px 5px rgb(83, 113, 51);
+    box-sizing: border-box;
+    cursor: pointer;
+    font-stretch: 100%;
+    margin-bottom: 5%;
+    width: 90%;
 }
 
 @keyframes fade-in {
