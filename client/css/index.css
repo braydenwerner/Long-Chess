@@ -5,6 +5,20 @@ html, body {
     background-color: rgb(41, 45, 62);
 }
 
+#github {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: rgb(255, 255, 255);
+}
+
+#githubLink {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+    color: rgb(255, 255, 255);
+}
+
 #joinContainer {
     display: flex;
     flex-direction: column;
@@ -474,8 +488,6 @@ html, body {
     margin-top: 10%;
     margin-bottom: 0;
 }
-
-#winImage {}
 
 #backToHomeButton {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
