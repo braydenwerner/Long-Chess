@@ -10,6 +10,7 @@ const display = document.getElementById("display");
 
 const createRoomPopupOverlay = document.getElementById("createRoomPopupOverlay");
 const createRoomInput = document.getElementById("createRoomInput");
+const submitCreateRoomButton = document.getElementById("submitCreateRoomButton");
 const closeCreateRoomPopup = document.getElementById("closeCreateRoomPopup");
 
 const joinRoomPopupOverlay = document.getElementById("joinRoomPopupOverlay");
@@ -28,8 +29,14 @@ createRoomButton.onclick = () => {
 }
 
 createRoomInput.onkeyup = e => {
-    //make safer, no injection of html
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && validInput(createRoomInput.value)) {
+        createRoomPopupOverlay.style.display = "none";
+        startGame(createRoomInput.value, "create");
+    }
+}
+
+submitCreateRoomButton.onclick = () => {
+    if (validInput(createRoomInput.value)) {
         createRoomPopupOverlay.style.display = "none";
         startGame(createRoomInput.value, "create");
     }
@@ -53,6 +60,15 @@ joinRoomInput.onkeyup = e => {
 
 closeJoinRoomPopup.onclick = () => {
     joinRoomPopupOverlay.style.display = "none";
+}
+
+function validInput(input) {
+    let valid = /^[0-9a-zA-Z]+$/;
+    if (input.match(valid)) return true;
+    else {
+        alert("Room codes must only contain letters and digits.");
+        return false;
+    }
 }
 
 function startGame(room, joinOption) {
@@ -82,13 +98,6 @@ export function noError() {
 backToHomeButton.onclick = () => {
     location.reload();
 }
-
-// //if rematch, clear popup, send socket request to reset room
-// rematchButton.onclick = () => {
-//     startCaptureInput();
-
-//     winScreenOverlay.style.display = "none";
-// }
 
 export function whiteWins() {
     stopCaptureInput();

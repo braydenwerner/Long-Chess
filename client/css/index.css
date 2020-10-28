@@ -6,9 +6,22 @@ html, body {
 }
 
 #joinContainer {
-    animation: fade-in 8.5s ease;
     display: flex;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(31, 35, 42);
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#playOptions {
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
     text-align: center;
     align-items: center;
 }
@@ -17,9 +30,36 @@ html, body {
     #mainHeader {
         font-family: 'Tangerine', cursive;
         font-size: 60px;
-        margin-bottom: 5%;
-        margin-top: 300px;
         color: rgb(199, 146, 234);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    #createRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10px;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+        margin-bottom: 2%;
+    }
+    #joinRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10px;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
     }
 }
 
@@ -27,77 +67,105 @@ html, body {
     #mainHeader {
         font-family: 'Tangerine', cursive;
         font-size: 100px;
-        margin-bottom: 5%;
-        margin-top: 300px;
         color: rgb(199, 146, 234);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    #createRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+        margin-bottom: 2%;
+    }
+    #joinRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
     }
 }
 
 @media (min-width: 900px) {
     #mainHeader {
         font-family: 'Tangerine', cursive;
-        font-size: 160px;
-        margin-bottom: 5%;
-        margin-top: 300px;
+        font-size: 140px;
         color: rgb(199, 146, 234);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    #createRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+        margin-bottom: 2%;
+    }
+    #joinRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
     }
 }
 
 @media (min-width: 1200px) {
     #mainHeader {
         font-family: 'Tangerine', cursive;
-        font-size: 260px;
-        margin-bottom: 5%;
-        color: rgb(199, 146, 234);
-        margin-top: 200px;
+        font-size: 180px;
+        color: rgb(255, 255, 255);
+        margin-top: 0;
+        margin-bottom: 0;
     }
-}
-
-#createRoomButton {
-    width: 25%;
-    height: 40px;
-    background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
-    border: none;
-    border-radius: 5px;
-    border-bottom: 4px solid #2b8bc6;
-    color: #fbfbfb;
-    font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
-    font-size: 15px;
-    text-align: left;
-    text-indent: 5px;
-    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, .2);
-    cursor: pointer;
-    outline: none;
-}
-
-#joinRoomButton {
-    width: 25%;
-    height: 40px;
-    background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
-    border: none;
-    border-radius: 5px;
-    border-bottom: 4px solid #2b8bc6;
-    color: #fbfbfb;
-    font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
-    font-size: 15px;
-    text-align: left;
-    text-indent: 5px;
-    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, .2);
-    cursor: pointer;
-    outline: none;
-    margin-top: 15px;
-}
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
+    #createRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 25px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+        margin-bottom: 2%;
     }
-    100% {
-        opacity: 1;
+    #joinRoomButton {
+        background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+        border: none;
+        border-radius: 5px;
+        color: #fbfbfb;
+        font-weight: 00;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 25px;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+        margin-bottom: 2%;
     }
 }
 
@@ -109,58 +177,98 @@ html, body {
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    ;
 }
 
-#createRoomContainer {
-    display: flex;
-    flex-direction: row;
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(53, 53, 53);
-    align-items: center;
-    text-align: center;
-    border-radius: 20px;
-    justify-content: space-around;
+@media (max-width: 500px) {
+    #createRoomContainer {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(53, 53, 53);
+        align-items: center;
+        text-align: center;
+        border-radius: 20px;
+        justify-content: space-around;
+    }
+    #longChessImage {
+        margin-left: 10px;
+        top: 35px;
+        width: 115px;
+        height: 231px;
+    }
+    #inputField {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #submitCreateRoomButton {
+        width: 87%;
+        padding: 5px;
+    }
+    #createRoomInput {
+        border: none;
+        outline: none;
+        text-align: center;
+        padding: 5px;
+        width: 80%;
+    }
+    #closeCreateRoomPopup {
+        margin-top: 40%;
+        width: 20px;
+    }
 }
 
-#longChessImage {
-    position: absolute;
-    left: 50px;
-    top: 25px;
-}
-
-#inputField {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#createRoomCodeText {
-    margin-top: 55%;
-    color: rgb(255, 255, 255);
-    font-size: 35px;
-}
-
-#submitCreateRoomButton {
-    width: 88%;
-    padding: 5px;
-}
-
-#createRoomInput {
-    border: none;
-    outline: none;
-    text-align: center;
-    padding: 5px;
-}
-
-#closeCreateRoomPopup {
-    margin-top: 80%;
-    width: 25px;
+@media(min-width: 500px) {
+    #createRoomContainer {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(53, 53, 53);
+        align-items: center;
+        text-align: center;
+        border-radius: 20px;
+        justify-content: space-around;
+    }
+    #longChessImage {
+        margin-left: 10px;
+        top: 25px;
+        width: 230px;
+        height: 463px;
+    }
+    #createRoomCodeText {
+        margin-top: 55%;
+        color: rgb(255, 255, 255);
+        font-size: 35px;
+    }
+    #inputField {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #submitCreateRoomButton {
+        width: 84%;
+        padding: 5px;
+    }
+    #createRoomInput {
+        border: none;
+        outline: none;
+        text-align: center;
+        padding: 5px;
+    }
+    #closeCreateRoomPopup {
+        margin-top: 80%;
+        width: 25px;
+    }
 }
 
 #joinRoomPopupOverlay {
@@ -177,15 +285,15 @@ html, body {
     display: flex;
     flex-direction: column;
     position: fixed;
-    width: 300px;
-    height: 100px;
+    width: 250px;
+    height: 75px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(53, 53, 53);
     align-items: center;
     text-align: center;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 #joinRoomInput {
@@ -198,7 +306,9 @@ html, body {
 }
 
 #closeJoinRoomPopup {
-    margin-top: 10px;
+    width: 25px;
+    height: 25px;
+    margin-top: 1%;
 }
 
 #display {
@@ -257,4 +367,13 @@ html, body {
     border-radius: 25px;
     color: rgb(255, 255, 255);
     background-color: rgb(41, 45, 62);
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
