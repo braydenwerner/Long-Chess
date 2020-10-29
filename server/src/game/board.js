@@ -4,12 +4,24 @@ const Knight = require("./pieces/knight");
 const Pawn = require("./pieces/pawn");
 const Queen = require("./pieces/queen");
 const Rook = require("./pieces/rook");
-const Constants = require("../../constantServer.js");
 
 class Board {
-    constructor() {
-        this.board =
-            [[new Rook("Black"), new Queen("Black"), new King("Black"), new Rook("Black")],
+    constructor(gameMode) {
+        if (gameMode === "standardChess") {
+            this.NUM_TILES_WIDTH = 8;
+            this.NUM_TILES_HEIGHT = 8;
+            this.board = [[new Rook("Black"), new Knight("Black"), new Bishop("Black"), new Queen("Black"), new King("Black"), new Bishop("Black"), new Knight("Black"), new Rook("Black")],
+            [new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black")],
+            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+            [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
+            [new Rook("White"), new Knight("White"), new Bishop("White"), new Queen("White"), new King("White"), new Bishop("White"), new Knight("White"), new Rook("White")]];
+        } else if (gameMode === "longChess") {
+            this.NUM_TILES_WIDTH = 4;
+            this.NUM_TILES_HEIGHT = 8;
+            this.board = [[new Rook("Black"), new Queen("Black"), new King("Black"), new Rook("Black")],
             [new Bishop("Black"), new Knight("Black"), new Knight("Black"), new Bishop("Black")],
             [new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black")],
             ["empty", "empty", "empty", "empty"],
@@ -17,13 +29,14 @@ class Board {
             [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
             [new Bishop("White"), new Knight("White"), new Knight("White"), new Bishop("White")],
             [new Rook("White"), new Queen("White"), new King("White"), new Rook("White")]];
+        }
     }
 
     serializeBoard() {
         //return a board of all string values to render clientside
-        let clientBoard = new Array(Constants.NUM_TILES_HEIGHT);
+        let clientBoard = new Array(this.NUM_TILES_HEIGHT);
         for (let i = 0; i < clientBoard.length; i++) {
-            clientBoard[i] = new Array(Constants.NUM_TILES_WIDTH);
+            clientBoard[i] = new Array(this.NUM_TILES_WIDTH);
         }
 
         for (let i = 0; i < this.board.length; i++) {

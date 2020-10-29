@@ -1,7 +1,7 @@
 import { connect, createRoom, joinRoom } from "./networking.js";
 import { startCaptureInput, stopCaptureInput } from "./input.js"
 import { downloadAudios, downloadImages } from "./assetLoader.js";
-import { startRendering, stopRendering } from "./render.js";
+import { startRendering } from "./render.js";
 
 const joinContainer = document.getElementById("joinContainer");
 const createRoomButton = document.getElementById("createRoomButton");
@@ -22,18 +22,17 @@ const winMessage = document.getElementById("winMessage");
 const backToHomeButton = document.getElementById("backToHomeButton");
 //const rematchButton = document.getElementById("rematchButton");
 
-const winImage = document.getElementById("winImage");
-
 Promise.all([connect(), downloadImages(), downloadAudios()]);
 
 createRoomButton.onclick = () => {
     createRoomPopupOverlay.style.display = "initial";
 }
 
+export let gameMode = "standardChess";
 createRoomInput.onkeyup = e => {
     if (e.key === "Enter" && validInput(createRoomInput.value)) {
         createRoomPopupOverlay.style.display = "none";
-        startGame(createRoomInput.value, "create");
+        startGame(createRoomInput.value, "create", gameMode);
     }
 }
 
@@ -73,8 +72,8 @@ function validInput(input) {
     }
 }
 
-function startGame(room, joinOption) {
-    if (joinOption === "create") createRoom(room);
+function startGame(room, joinOption, gameMode) {
+    if (joinOption === "create") createRoom(room, gameMode);
     else if (joinOption === "join") joinRoom(room);
 }
 

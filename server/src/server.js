@@ -16,15 +16,15 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on("connection", socket => {
-  socket.on("/createRoom", roomName => {
+  socket.on("/createRoom", (roomName, gameMode) => {
     if (game.rooms[roomName]) socket.emit("/alreadyExists");
     else {
       socket.emit("/noError");
-      game.addSocket(socket, roomName);
+      game.addSocket(socket, roomName, gameMode);
     }
   });
 
-  socket.on("/joinRoom", roomName => {
+  socket.on("/joinRoom", (roomName) => {
     if (!game.rooms[roomName] || game.rooms[roomName].sockets.length >= 2) socket.emit("/roomFullOrNotExist");
     else {
       socket.emit("/noError");

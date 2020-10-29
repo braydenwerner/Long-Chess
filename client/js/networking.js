@@ -2,8 +2,8 @@ import { processGameUpdate } from "./gameUpdate.js";
 import { duplicateRoom, roomFullOrNotExist, noError, whiteWins, blackWins } from "./app.js";
 import { gameStart, movePiece } from "./playAudio.js";
 
-const PORT = "https://long-chess.herokuapp.com/";
-//const PORT = "http://localhost:4000";
+//const PORT = "https://long-chess.herokuapp.com/";
+const PORT = "http://localhost:4000";
 export const socket = io(PORT);
 
 const connectedPromise = new Promise((resolve => {
@@ -26,8 +26,8 @@ export const connect = () => {
     });
 }
 
-export const createRoom = roomName => {
-    socket.emit("/createRoom", roomName);
+export const createRoom = (roomName, gameMode) => {
+    socket.emit("/createRoom", roomName, gameMode);
 }
 
 export const joinRoom = roomName => {

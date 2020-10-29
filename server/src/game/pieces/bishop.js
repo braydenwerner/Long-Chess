@@ -1,4 +1,3 @@
-const Constants = require("../../../constantServer.js");
 const ChessPiece = require("./chessPiece.js");
 
 class Bishop extends ChessPiece {
@@ -6,7 +5,7 @@ class Bishop extends ChessPiece {
         super(color);
     }
 
-    getMoves(board, row, col) {
+    getMoves(board, row, col, NUM_TILES_WIDTH, NUM_TILES_HEIGHT) {
         let possibleMoves = [];
 
         //diagonal up left
@@ -25,7 +24,7 @@ class Bishop extends ChessPiece {
         //diagonal up right
         tempRow = row;
         tempCol = col;
-        while (tempRow - 1 >= 0 && tempCol + 1 < Constants.NUM_TILES_WIDTH
+        while (tempRow - 1 >= 0 && tempCol + 1 < NUM_TILES_WIDTH
             && board[tempRow - 1][tempCol + 1].color != this.color) {
             possibleMoves.push({
                 row: --tempRow,
@@ -38,7 +37,7 @@ class Bishop extends ChessPiece {
         //diagonal down left
         tempRow = row;
         tempCol = col;
-        while (tempRow + 1 < Constants.NUM_TILES_HEIGHT && tempCol - 1 >= 0
+        while (tempRow + 1 < NUM_TILES_HEIGHT && tempCol - 1 >= 0
             && board[tempRow + 1][tempCol - 1].color != this.color) {
             possibleMoves.push({
                 row: ++tempRow,
@@ -51,7 +50,7 @@ class Bishop extends ChessPiece {
         //diagonal down right
         tempRow = row;
         tempCol = col;
-        while (tempRow + 1 < Constants.NUM_TILES_HEIGHT && tempCol + 1 < Constants.NUM_TILES_WIDTH
+        while (tempRow + 1 < NUM_TILES_HEIGHT && tempCol + 1 < NUM_TILES_WIDTH
             && board[tempRow + 1][tempCol + 1].color != this.color) {
             possibleMoves.push({
                 row: ++tempRow,

@@ -1,6 +1,3 @@
-export const NUM_TILES_WIDTH = 4;
-export const NUM_TILES_HEIGHT = 8;
-
 export const PAWN_WIDTH = 61;
 export const PAWN_HEIGHT = 79;
 

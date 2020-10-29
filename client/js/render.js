@@ -1,6 +1,7 @@
 import { getCurrentState } from "./gameUpdate.js";
+import { gameMode } from "./app.js";
 import {
-    NUM_TILES_WIDTH, NUM_TILES_HEIGHT, PAWN_WIDTH, PAWN_HEIGHT, ROOK_HEIGHT, ROOK_WIDTH, KNIGHT_WIDTH,
+    PAWN_WIDTH, PAWN_HEIGHT, ROOK_HEIGHT, ROOK_WIDTH, KNIGHT_WIDTH,
     KNIGHT_HEIGHT, BISHOP_WIDTH, BISHOP_HEIGHT, QUEEN_WIDTH, QUEEN_HEIGHT, KING_WIDTH, KING_HEIGHT
 } from "./constantClient.js";
 import { getImages } from "./assetLoader.js";
@@ -10,27 +11,40 @@ const canvas = document.getElementById("display");
 const ctx = canvas.getContext("2d");
 const images = getImages();
 
-export let tileSize;
-export let offsetX;
+let NUM_TILES_HEIGHT;
+let NUM_TILES_WIDTH;
+
+let tileSize;
+let offsetX;
+
 let mousePos;
 let whiteID;
 let board;
 let selectedPiece;
 
-initMapVars();
+let interval;
+
 window.onresize = () => {
-    initMapVars();
+    if (NUM_TILES_HEIGHT && NUM_TILES_WIDTH) initMapVars();
 }
 
 function initMapVars() {
+    if (gameMode === "standardChess") {
+        NUM_TILES_WIDTH = 8;
+        NUM_TILES_HEIGHT = 8;
+    } else if (gameMode === "longChess") {
+        NUM_TILES_WIDTH = 4;
+        NUM_TILES_HEIGHT = 8;
+    }
+
     canvas.width = window.innerWidth - 2;
     canvas.height = window.innerHeight - 40;
     tileSize = (canvas.height - 2) / NUM_TILES_HEIGHT;
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
 }
 
-let interval;
 export function startRendering() {
+    initMapVars();
     interval = setInterval(render, 1000 / 60);
 }
 

@@ -9,10 +9,10 @@ class Game {
     setInterval(this.update.bind(this), 1000 / 60);
   }
 
-  addSocket(socket, roomName) {
+  addSocket(socket, roomName, gameMode) {
     if (this.rooms[roomName]) this.rooms[roomName].addSocket(socket)
     else {
-      this.rooms[roomName] = new Room(roomName);
+      this.rooms[roomName] = new Room(roomName, gameMode);
       this.rooms[roomName].addSocket(socket);
     }
   }

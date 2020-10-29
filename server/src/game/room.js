@@ -1,9 +1,8 @@
 const Board = require("./board");
-const Constants = require("../../constantServer.js");
 const King = require("./pieces/king");
 
 class Room {
-    constructor(roomName) {
+    constructor(roomName, gameMode) {
         this.roomName = roomName;
         this.sockets = [];
 
@@ -14,7 +13,7 @@ class Room {
         this.turn;
         this.white;
 
-        this.board = new Board();
+        this.board = new Board(gameMode);
     }
 
     addSocket(socket) {
@@ -44,8 +43,8 @@ class Room {
     makeMove(socket, moveData) {
         //return if out of bounds, not playing, choose empty piece,
         // not enough players, not player's turn
-        if (moveData.endRow < 0 || moveData.endRow >= Constants.NUM_TILES_HEIGHT
-            || moveData.endCol < 0 || moveData.endCol >= Constants.NUM_TILES_WIDTH
+        if (moveData.endRow < 0 || moveData.endRow >= this.board.NUM_TILES_HEIGHT
+            || moveData.endCol < 0 || moveData.endCol >= this.board.NUM_TILES_WIDTH
             || this.board.board[moveData.startRow][moveData.startCol] === "empty"
             || !this.playing
             || this.sockets.length < 2
@@ -56,9 +55,9 @@ class Room {
         }
 
         //create a temporary board to faciliatate undoing a move if it puts own king into check.
-        let tempBoard = new Array(Constants.NUM_TILES_HEIGHT);
+        let tempBoard = new Array(this.board.NUM_TILES_HEIGHT);
         for (let i = 0; i < tempBoard.length; i++) {
-            tempBoard[i] = new Array(Constants.NUM_TILES_WIDTH);
+            tempBoard[i] = new Array(this.board.NUM_TILES_WIDTH);
         }
 
         for (let i = 0; i < tempBoard.length; i++) {
@@ -68,12 +67,25 @@ class Room {
         }
 
         //obtain a list of all possible moves of the selected piece and make move if valid
-        let possibleMoves = this.board.board[moveData.startRow][moveData.startCol].getMoves(this.board.board, moveData.startRow, moveData.startCol);
+        let piece = this.board.board[moveData.startRow][moveData.startCol];
+        let possibleMoves = piece.getMoves(this.board.board, moveData.startRow, moveData.startCol, this.board.NUM_TILES_WIDTH, this.board.NUM_TILES_HEIGHT);
         for (let i = 0; i < possibleMoves.length; i++) {
             if (possibleMoves[i].col === moveData.endCol && possibleMoves[i].row === moveData.endRow) {
+                //check if its a king castle move
+                if (possibleMoves[i].isCastle) {
+                    this.board.board[possibleMoves[i].row][possibleMoves[i].col] = this.board.board[moveData.startRow][moveData.startCol];
+                    this.board.board[moveData.startRow][moveData.startCol] = "empty";
+
+                    this.board.board[possibleMoves[i].endRookRow][possibleMoves[i].endRookCol] = this.board.board[possibleMoves[i].startRookRow][possibleMoves[i].startRookCol];
+                    this.board.board[possibleMoves[i].startRookRow][possibleMoves[i].startRookCol] = "empty";
+                    this.turn = (this.turn === this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+                    break;
+                }
+
                 this.board.board[moveData.endRow][moveData.endCol] = this.board.board[moveData.startRow][moveData.startCol];
                 this.board.board[moveData.startRow][moveData.startCol] = "empty";
                 this.turn = (this.turn === this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+                break;
             }
         }
 
@@ -83,12 +95,14 @@ class Room {
         let inCheckWhite = this.kingInCheck(this.board.board, "White", whiteKingPos);
         let inCheckBlack = this.kingInCheck(this.board.board, "Black", blackKingPos);
 
+        //mark king as put in check. prevents invalid castling
+        if (this.turn === this.sockets[1].id && inCheckWhite) board[whiteKingPos.row][whiteKingPos.col].hasBeenInCheck = true;
+        else if (this.turn === this.sockets[0].id && inCheckBlack) board[blackKingPos.row][blackKingPos.col].hasBeenInCheck = true;
+
         if (this.turn === this.sockets[1].id && inCheckBlack && this.isCheckmate("Black")) {
             this.sockets[0].emit("/whiteWins");
             this.sockets[1].emit("/whiteWins");
-        }
-
-        if (this.turn === this.sockets[0].id && inCheckWhite && this.isCheckmate("White")) {
+        } else if (this.turn === this.sockets[0].id && inCheckWhite && this.isCheckmate("White")) {
             this.sockets[0].emit("/blackWins");
             this.sockets[1].emit("/blackWins");
         }
@@ -113,9 +127,9 @@ class Room {
 
     isCheckmate(color) {
         //loop through all peices of a given color and see if still in check
-        let tempBoard = new Array(Constants.NUM_TILES_HEIGHT);
+        let tempBoard = new Array(this.board.NUM_TILES_HEIGHT);
         for (let i = 0; i < tempBoard.length; i++) {
-            tempBoard[i] = new Array(Constants.NUM_TILES_WIDTH);
+            tempBoard[i] = new Array(this.board.NUM_TILES_WIDTH);
         }
 
         for (let i = 0; i < tempBoard.length; i++) {
@@ -127,7 +141,7 @@ class Room {
         for (let i = 0; i < tempBoard.length; i++) {
             for (let j = 0; j < tempBoard[0].length; j++) {
                 if (tempBoard[i][j].color === color) {
-                    let possibleMoves = tempBoard[i][j].getMoves(tempBoard, i, j);
+                    let possibleMoves = tempBoard[i][j].getMoves(tempBoard, i, j, this.board.NUM_TILES_WIDTH, this.board.NUM_TILES_HEIGHT);
                     //make the move and see if still in check
                     for (let k = 0; k < possibleMoves.length; k++) {
                         tempBoard[possibleMoves[k].row][possibleMoves[k].col] = tempBoard[i][j];
@@ -169,7 +183,7 @@ class Room {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[0].length; j++) {
                 if (board != "empty" && board[i][j].color === oppositeColor) {
-                    threatenedSquares.push(board[i][j].getMoves(board, i, j));
+                    threatenedSquares.push(board[i][j].getMoves(board, i, j, this.board.NUM_TILES_WIDTH, this.board.NUM_TILES_HEIGHT));
                 }
             }
         }
