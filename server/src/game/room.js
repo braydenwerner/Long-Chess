@@ -93,14 +93,13 @@ class Room {
             this.sockets[1].emit("/blackWins");
         }
 
-        //if player moves piece and is in check at end of turn, undo the move
-        //find opposite color because already switched turn, have to revert back
-        if (this.turn === this.sockets[0].id && inCheckBlack) this.undoMove(tempBoard);
-        if (this.turn === this.sockets[1].id && inCheckWhite) this.undoMove(tempBoard);
-
-        //play move audio
-        this.sockets[0].emit("/movePieceAudio");
-        this.sockets[1].emit("/movePieceAudio");
+        //undo move if the king is still in check at the end of turn
+        if (this.turn === this.sockets[0].id && inCheckBlack || this.turn === this.sockets[1].id && inCheckWhite) this.undoMove(tempBoard);
+        else {
+            //if the move is not undone it is valid, play move audio
+            this.sockets[0].emit("/movePieceAudio");
+            this.sockets[1].emit("/movePieceAudio");
+        }
 
         if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
         else this.selectedPieceBlack = -1;
