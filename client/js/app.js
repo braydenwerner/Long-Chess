@@ -22,6 +22,15 @@ const winMessage = document.getElementById("winMessage");
 const backToHomeButton = document.getElementById("backToHomeButton");
 //const rematchButton = document.getElementById("rematchButton");
 
+const standardChessMainHeader = document.getElementById("standardChessMainHeader");
+const standardChessSubHeader = document.getElementById("stardardChessSubHeader");
+const longChessMainHeader = document.getElementById("longChessMainHeader");
+const longChessSubHeader = document.getElementById("longChessSubHeader");
+
+let gamemodes = ["standardChess", "longChess"];
+let selctedGameMode = "standardChess";
+
+
 Promise.all([connect(), downloadImages(), downloadAudios()]);
 
 createRoomButton.onclick = () => {

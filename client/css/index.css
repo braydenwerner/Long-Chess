@@ -40,15 +40,31 @@ html, body {
     margin-top: 3%;
 }
 
+#changeGameModeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+#longChessMainHeader {
+    display: none;
+}
+
+#longChessSubHeader {
+    display: none;
+}
+
 @media (max-width: 500px) {
-    #mainHeader {
+    .mainHeader {
         font-family: 'Fjalla One', sans-serif;
         font-size: 80px;
         color: rgb(255, 255, 255);
         margin-top: 15%;
         margin-bottom: 1%;
     }
-    #subHeader {
+    .subHeader {
         color: rgb(200, 200, 200);
     }
     #createRoomButton {
@@ -83,17 +99,30 @@ html, body {
         margin-bottom: 10%;
         width: 80%;
     }
+    #nextPageLeft {
+        width: 100px;
+        height: 100px;
+    }
+    #changeGameModeText {
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 70px;
+        color: rgb(255, 255, 255);
+    }
+    #nextPageRight {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 @media (min-width: 500px) {
-    #mainHeader {
+    .mainHeader {
         font-family: 'Fjalla One', sans-serif;
         font-size: 100px;
         color: rgb(255, 255, 255);
         margin-top: 15%;
         margin-bottom: 0;
     }
-    #subHeader {
+    .subHeader {
         color: rgb(200, 200, 200);
     }
     #createRoomButton {
@@ -128,17 +157,30 @@ html, body {
         margin-bottom: 8%;
         width: 55%;
     }
+    #nextPageLeft {
+        width: 100px;
+        height: 100px;
+    }
+    #changeGameModeText {
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 70px;
+        color: rgb(255, 255, 255);
+    }
+    #nextPageRight {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 @media (min-width: 900px) {
-    #mainHeader {
+    .mainHeader {
         font-family: 'Fjalla One', sans-serif;
         font-size: 140px;
         color: rgb(255, 255, 255);
         margin-top: 15%;
         margin-bottom: 0;
     }
-    #subHeader {
+    .subHeader {
         color: rgb(200, 200, 200);
     }
     #createRoomButton {
@@ -173,17 +215,30 @@ html, body {
         margin-bottom: 4%;
         width: 35%;
     }
+    #nextPageLeft {
+        width: 100px;
+        height: 100px;
+    }
+    #changeGameModeText {
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 70px;
+        color: rgb(255, 255, 255);
+    }
+    #nextPageRight {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 @media (min-width: 1200px) {
-    #mainHeader {
+    .mainHeader {
         font-family: 'Fjalla One', sans-serif;
         font-size: 180px;
         color: rgb(255, 255, 255);
         margin-top: 10%;
         margin-bottom: 0;
     }
-    #subHeader {
+    .subHeader {
         color: rgb(200, 200, 200);
     }
     #createRoomButton {
@@ -217,6 +272,19 @@ html, body {
         font-stretch: 100%;
         margin-bottom: 5%;
         width: 25%;
+    }
+    #nextPageLeft {
+        width: 100px;
+        height: 100px;
+    }
+    #changeGameModeText {
+        font-family: 'Fjalla One', sans-serif;
+        font-size: 70px;
+        color: rgb(255, 255, 255);
+    }
+    #nextPageRight {
+        width: 100px;
+        height: 100px;
     }
 }
 
