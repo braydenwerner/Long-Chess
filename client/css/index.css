@@ -100,17 +100,18 @@ html, body {
         width: 80%;
     }
     #nextPageLeft {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
     #changeGameModeText {
         font-family: 'Fjalla One', sans-serif;
-        font-size: 70px;
+        font-size: 50px;
         color: rgb(255, 255, 255);
+        pointer-events: none;
     }
     #nextPageRight {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
 }
 
@@ -165,6 +166,7 @@ html, body {
         font-family: 'Fjalla One', sans-serif;
         font-size: 70px;
         color: rgb(255, 255, 255);
+        pointer-events: none;
     }
     #nextPageRight {
         width: 100px;
@@ -223,6 +225,7 @@ html, body {
         font-family: 'Fjalla One', sans-serif;
         font-size: 70px;
         color: rgb(255, 255, 255);
+        pointer-events: none;
     }
     #nextPageRight {
         width: 100px;
@@ -281,6 +284,7 @@ html, body {
         font-family: 'Fjalla One', sans-serif;
         font-size: 70px;
         color: rgb(255, 255, 255);
+        pointer-events: none;
     }
     #nextPageRight {
         width: 100px;
@@ -303,7 +307,6 @@ html, body {
         display: flex;
         flex-direction: row;
         position: fixed;
-        width: 300px;
         height: 300px;
         top: 50%;
         left: 50%;
@@ -314,7 +317,7 @@ html, body {
         border-radius: 20px;
         justify-content: space-around;
     }
-    #longChessImage {
+    #gameModeImage {
         margin-left: 10px;
         top: 35px;
         width: 115px;
@@ -407,7 +410,6 @@ html, body {
         display: flex;
         flex-direction: row;
         position: fixed;
-        width: 500px;
         height: 500px;
         top: 50%;
         left: 50%;
@@ -418,7 +420,7 @@ html, body {
         border-radius: 20px;
         justify-content: space-around;
     }
-    #longChessImage {
+    #gameModeImage {
         margin-left: 10px;
         top: 25px;
         width: 230px;

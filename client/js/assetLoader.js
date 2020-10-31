@@ -33,7 +33,7 @@ export const getImages = () => images;
 
 const AUDIO_FILES = [
     "game-start.wav",
-    "move-piece.wav",
+    "move-self.wav",
 ];
 
 const audioObject = {};

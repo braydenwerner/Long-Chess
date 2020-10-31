@@ -9,7 +9,7 @@ export function gameStart() {
 }
 
 export function movePiece() {
-    let moveSelf = AUDIO["move-piece.wav"].cloneNode();
+    let moveSelf = AUDIO["move-self.wav"].cloneNode();
     moveSelf.volume = ".4";
     moveSelf.play();
 }

@@ -8,6 +8,7 @@ const createRoomButton = document.getElementById("createRoomButton");
 const joinRoomButton = document.getElementById("joinRoomButton");
 const display = document.getElementById("display");
 
+const createRoomContainer = document.getElementById("createRoomContainer");
 const createRoomPopupOverlay = document.getElementById("createRoomPopupOverlay");
 const createRoomInput = document.getElementById("createRoomInput");
 const submitCreateRoomButton = document.getElementById("submitCreateRoomButton");
@@ -23,13 +24,69 @@ const backToHomeButton = document.getElementById("backToHomeButton");
 //const rematchButton = document.getElementById("rematchButton");
 
 const standardChessMainHeader = document.getElementById("standardChessMainHeader");
-const standardChessSubHeader = document.getElementById("stardardChessSubHeader");
+const standardChessSubHeader = document.getElementById("standardChessSubHeader");
 const longChessMainHeader = document.getElementById("longChessMainHeader");
 const longChessSubHeader = document.getElementById("longChessSubHeader");
 
-let gamemodes = ["standardChess", "longChess"];
-let selctedGameMode = "standardChess";
+const nextPageLeft = document.getElementById("nextPageLeft");
+const nextPageRight = document.getElementById("nextPageRight");
 
+const gameModeImage = document.getElementById("gameModeImage");
+
+export let gameMode = "standardChess";
+
+let totalGameModes = 2;
+let gameModeIndex = 0;
+setGameModeImage(gameModeIndex);
+
+nextPageLeft.onclick = () => {
+    gameModeIndex--;
+    if (gameModeIndex < 0) gameModeIndex = totalGameModes - 1;
+
+    setGameModeImage(gameModeIndex);
+    setGamemode(gameModeIndex);
+}
+
+nextPageRight.onclick = () => {
+    gameModeIndex++;
+    if (gameModeIndex >= totalGameModes) gameModeIndex = 0;
+
+    setGameModeImage(gameModeIndex);
+    setGamemode(gameModeIndex);
+}
+
+function setGameModeImage(gameModeIndex) {
+    if (gameModeIndex == 0) {
+        gameModeImage.src = "./Images/standardChessBoard.PNG";
+        gameModeImage.style.width = "460px";
+        gameModeImage.style.height = "460px";
+        createRoomContainer.style.width = "40%";
+    } else if (gameModeIndex == 1) {
+        gameModeImage.src = "./Images/longChessBoard.PNG";
+        gameModeImage.style.width = "230px";
+        gameModeImage.style.height = "460px";
+        createRoomContainer.style.width = "30%";
+    }
+}
+
+
+function setGamemode(gameModeIndex) {
+    if (gameModeIndex == 0) {
+        gameMode = "standardChess";
+        standardChessMainHeader.style.display = "initial";
+        standardChessSubHeader.style.display = "initial";
+
+        longChessMainHeader.style.display = "none";
+        longChessSubHeader.style.display = "none";
+    } else if (gameModeIndex == 1) {
+        gameMode = "longChess";
+        longChessMainHeader.style.display = "initial";
+        longChessSubHeader.style.display = "initial";
+
+        standardChessMainHeader.style.display = "none";
+        standardChessSubHeader.style.display = "none";
+    }
+}
 
 Promise.all([connect(), downloadImages(), downloadAudios()]);
 
@@ -37,7 +94,6 @@ createRoomButton.onclick = () => {
     createRoomPopupOverlay.style.display = "initial";
 }
 
-export let gameMode = "standardChess";
 createRoomInput.onkeyup = e => {
     if (e.key === "Enter" && validInput(createRoomInput.value)) {
         createRoomPopupOverlay.style.display = "none";
