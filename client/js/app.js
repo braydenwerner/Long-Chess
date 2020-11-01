@@ -27,6 +27,8 @@ const standardChessMainHeader = document.getElementById("standardChessMainHeader
 const standardChessSubHeader = document.getElementById("standardChessSubHeader");
 const longChessMainHeader = document.getElementById("longChessMainHeader");
 const longChessSubHeader = document.getElementById("longChessSubHeader");
+const chaosChessMainHeader = document.getElementById("chaosChessMainHeader");
+const chaosChessSubHeader = document.getElementById("chaosChessSubHeader");
 
 const nextPageLeft = document.getElementById("nextPageLeft");
 const nextPageRight = document.getElementById("nextPageRight");
@@ -84,17 +86,20 @@ function setGamemode(gameModeIndex) {
         longChessMainHeader.style.display = "initial";
         longChessSubHeader.style.display = "initial";
     } else if (gameModeIndex == 2) {
+        clearDisplays();
         gameMode = "chaosChess";
-
+        chaosChessMainHeader.style.display = "initial";
+        chaosChessSubHeader.style.display = "initial";
     }
 }
 
 function clearDisplays() {
-    longChessMainHeader.style.display = "none";
-    longChessSubHeader.style.display = "none";
-
     standardChessMainHeader.style.display = "none";
     standardChessSubHeader.style.display = "none";
+    longChessMainHeader.style.display = "none";
+    longChessSubHeader.style.display = "none";
+    chaosChessMainHeader.style.display = "none";
+    chaosChessSubHeader.style.display = "none";
 }
 
 Promise.all([connect(), downloadImages(), downloadAudios()]);
