@@ -55,17 +55,21 @@ nextPageRight.onclick = () => {
     setGamemode(gameModeIndex);
 }
 
+window.onresize = () => {
+    console.log("reached");
+    setGameModeImage(gameModeIndex);
+}
+
 function setGameModeImage(gameModeIndex) {
+    console.log("reached");
     if (gameModeIndex == 0) {
         gameModeImage.src = "./Images/standardChessBoard.PNG";
-        gameModeImage.style.width = "460px";
-        gameModeImage.style.height = "460px";
-        createRoomContainer.style.width = "40%";
+        gameModeImage.style.width = window.innerWidth / 4.9 + "px";
+        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
     } else if (gameModeIndex == 1) {
         gameModeImage.src = "./Images/longChessBoard.PNG";
-        gameModeImage.style.width = "230px";
-        gameModeImage.style.height = "460px";
-        createRoomContainer.style.width = "30%";
+        gameModeImage.style.width = window.innerWidth / 9.8 + "px";
+        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
     }
 }
 

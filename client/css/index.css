@@ -302,12 +302,11 @@ html, body {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1330px) {
     #createRoomContainer {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         position: fixed;
-        height: 300px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -318,10 +317,8 @@ html, body {
         justify-content: space-around;
     }
     #gameModeImage {
-        margin-left: 10px;
-        top: 35px;
-        width: 115px;
-        height: 231px;
+        margin-top: 14%;
+        margin-bottom: 10%;
     }
     #inputField {
         display: flex;
@@ -333,7 +330,7 @@ html, body {
         background-color: rgb(133, 170, 83);
         border: none;
         border-radius: 5px;
-        padding: 10px;
+        padding: 6px;
         color: rgb(255, 255, 255);
         font-size: 22px;
         outline: none;
@@ -353,7 +350,7 @@ html, body {
         border: none;
         border-radius: 5px;
         padding: 10px;
-        font-size: 18px;
+        font-size: 15px;
         outline: none;
         box-sizing: border-box;
         cursor: pointer;
@@ -370,8 +367,8 @@ html, body {
         display: flex;
         flex-direction: column;
         position: fixed;
-        width: 70%;
-        height: 15%;
+        width: 40%;
+        height: 10%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -389,12 +386,12 @@ html, body {
         border: none;
         border-radius: 5px;
         padding: 10px;
-        font-size: 22px;
+        font-size: 12px;
         outline: none;
         box-sizing: border-box;
         cursor: pointer;
         font-stretch: 100%;
-        margin-top: 10%;
+        margin-top: 5%;
         width: 70%;
     }
     #closeJoinRoomPopup {
@@ -405,12 +402,13 @@ html, body {
     }
 }
 
-@media(min-width: 500px) {
+@media(min-width: 1330px) {
     #createRoomContainer {
         display: flex;
         flex-direction: row;
         position: fixed;
-        height: 500px;
+        height: 45%;
+        width: 35%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -440,13 +438,13 @@ html, body {
         border: none;
         border-radius: 5px;
         padding: 10px;
-        font-size: 22px;
+        font-size: 20px;
         outline: none;
         box-sizing: border-box;
         cursor: pointer;
         font-stretch: 100%;
         margin-bottom: 5%;
-        width: 100%;
+        width: 95%;
     }
     #submitCreateRoomButton {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -462,7 +460,7 @@ html, body {
         cursor: pointer;
         font-stretch: 100%;
         margin-bottom: 5%;
-        width: 100%;
+        width: 95%;
     }
     #closeCreateRoomPopup {
         margin-top: 20%;
@@ -492,7 +490,7 @@ html, body {
         border: none;
         border-radius: 5px;
         padding: 10px;
-        font-size: 22px;
+        font-size: 20px;
         outline: none;
         box-sizing: border-box;
         cursor: pointer;
