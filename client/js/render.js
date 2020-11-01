@@ -33,7 +33,6 @@ function initMapVars() {
     canvas.height = window.innerHeight - 40;
     tileSize = (canvas.height - 2) / NUM_TILES_HEIGHT;
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
-    console.log();
 }
 
 export function startRendering() {

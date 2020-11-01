@@ -97,8 +97,8 @@ class Room {
         let inCheckBlack = this.kingInCheck(this.board.board, "Black", blackKingPos);
 
         //mark king as put in check. prevents invalid castling
-        if (this.turn === this.sockets[1].id && inCheckWhite) board[whiteKingPos.row][whiteKingPos.col].hasBeenInCheck = true;
-        else if (this.turn === this.sockets[0].id && inCheckBlack) board[blackKingPos.row][blackKingPos.col].hasBeenInCheck = true;
+        if (this.turn === this.sockets[1].id && inCheckWhite) this.board.board[whiteKingPos.row][whiteKingPos.col].hasBeenInCheck = true;
+        else if (this.turn === this.sockets[0].id && inCheckBlack) this.board.board[blackKingPos.row][blackKingPos.col].hasBeenInCheck = true;
 
         if (this.turn === this.sockets[1].id && inCheckBlack && this.isCheckmate("Black")) {
             this.sockets[0].emit("/whiteWins");
