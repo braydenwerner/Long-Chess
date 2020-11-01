@@ -35,8 +35,8 @@ const gameModeImage = document.getElementById("gameModeImage");
 
 export let gameMode = "standardChess";
 
-let totalGameModes = 2;
-let gameModeIndex = 0;
+let totalGameModes = 3;
+let gameModeIndex = 2;
 setGameModeImage(gameModeIndex);
 
 nextPageLeft.onclick = () => {
@@ -56,13 +56,11 @@ nextPageRight.onclick = () => {
 }
 
 window.onresize = () => {
-    console.log("reached");
     setGameModeImage(gameModeIndex);
 }
 
 function setGameModeImage(gameModeIndex) {
-    console.log("reached");
-    if (gameModeIndex == 0) {
+    if (gameModeIndex == 0 || gameModeIndex == 2) {
         gameModeImage.src = "./Images/standardChessBoard.PNG";
         gameModeImage.style.width = window.innerWidth / 4.9 + "px";
         gameModeImage.style.height = window.innerWidth / 4.9 + "px";
@@ -76,20 +74,27 @@ function setGameModeImage(gameModeIndex) {
 
 function setGamemode(gameModeIndex) {
     if (gameModeIndex == 0) {
+        clearDisplays();
         gameMode = "standardChess";
         standardChessMainHeader.style.display = "initial";
         standardChessSubHeader.style.display = "initial";
-
-        longChessMainHeader.style.display = "none";
-        longChessSubHeader.style.display = "none";
     } else if (gameModeIndex == 1) {
+        clearDisplays();
         gameMode = "longChess";
         longChessMainHeader.style.display = "initial";
         longChessSubHeader.style.display = "initial";
+    } else if (gameModeIndex == 2) {
+        gameMode = "chaosChess";
 
-        standardChessMainHeader.style.display = "none";
-        standardChessSubHeader.style.display = "none";
     }
+}
+
+function clearDisplays() {
+    longChessMainHeader.style.display = "none";
+    longChessSubHeader.style.display = "none";
+
+    standardChessMainHeader.style.display = "none";
+    standardChessSubHeader.style.display = "none";
 }
 
 Promise.all([connect(), downloadImages(), downloadAudios()]);

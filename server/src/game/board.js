@@ -7,7 +7,7 @@ const Rook = require("./pieces/rook");
 
 class Board {
     constructor(gameMode) {
-        if (gameMode === "standardChess") {
+        if (gameMode === "standardChess" || gameMode === "chaosChess") {
             this.NUM_TILES_WIDTH = 8;
             this.NUM_TILES_HEIGHT = 8;
             this.board = [[new Rook("Black"), new Knight("Black"), new Bishop("Black"), new Queen("Black"), new King("Black"), new Bishop("Black"), new Knight("Black"), new Rook("Black")],

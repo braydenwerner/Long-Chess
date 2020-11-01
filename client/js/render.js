@@ -29,7 +29,7 @@ window.onresize = () => {
 }
 
 function initMapVars() {
-    if (gameMode === "standardChess") {
+    if (gameMode === "standardChess" || gameMode === "chaosChess") {
         NUM_TILES_WIDTH = 8;
         NUM_TILES_HEIGHT = 8;
     } else if (gameMode === "longChess") {
