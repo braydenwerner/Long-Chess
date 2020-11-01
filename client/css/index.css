@@ -48,11 +48,11 @@ html, body {
     text-align: center;
 }
 
-#longChessMainHeader, #chaosChessMainHeader {
+#longChessMainHeader, #instantDeathChessMainHeader {
     display: none;
 }
 
-#longChessSubHeader, #chaosChessSubHeader {
+#longChessSubHeader, #instantDeathChessSubHeader {
     display: none;
 }
 

@@ -6,6 +6,7 @@ class King extends ChessPiece {
         super(color);
 
         this.hasBeenInCheck = false;
+        this.hasMoved = false;
     }
 
     getMoves(board, row, col, NUM_TILES_WIDTH, NUM_TILES_HEIGHT) {
@@ -76,7 +77,7 @@ class King extends ChessPiece {
         }
 
         //castle
-        if (NUM_TILES_WIDTH === 8 && !this.hasBeenInCheck) {
+        if (NUM_TILES_WIDTH === 8 && !this.hasBeenInCheck && !this.hasMoved) {
             if (this.color === "White" && row === 7 && col === 4) {
                 if (board[7][0] instanceof Rook && board[7][0].color === "White"
                     && board[7][3] === "empty" && board[7][2] === "empty" && board[7][1] === "empty") {

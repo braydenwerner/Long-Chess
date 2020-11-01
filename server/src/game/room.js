@@ -10,7 +10,6 @@ class Room {
         this.selectedPieceBlack = -1;
 
         this.playing = false;
-        this.turn;
         this.white;
 
         this.board = new Board(gameMode);
@@ -43,7 +42,7 @@ class Room {
 
     makeMove(socket, moveData) {
         //return if out of bounds, not playing, choose empty piece,
-        // not enough players, not player's turn when gamemode is not chaos mode
+        // not enough players, not player's turn 
         if (moveData.endRow < 0 || moveData.endRow >= this.board.NUM_TILES_HEIGHT
             || moveData.endCol < 0 || moveData.endCol >= this.board.NUM_TILES_WIDTH
             || this.board.board[moveData.startRow][moveData.startCol] === "empty"
@@ -97,8 +96,24 @@ class Room {
         let inCheckBlack = this.kingInCheck(this.board.board, "Black", blackKingPos);
 
         //mark king as put in check. prevents invalid castling
-        if (this.turn === this.sockets[1].id && inCheckWhite) this.board.board[whiteKingPos.row][whiteKingPos.col].hasBeenInCheck = true;
-        else if (this.turn === this.sockets[0].id && inCheckBlack) this.board.board[blackKingPos.row][blackKingPos.col].hasBeenInCheck = true;
+        //in instant death mode, a check means a player loses
+        if (this.turn === this.sockets[0].id && inCheckWhite) {
+            if (this.gameMode === "instantDeathChess") {
+                this.sockets[0].emit("/blackWins");
+                this.sockets[1].emit("/blackWins");
+                return;
+            }
+
+            this.board.board[whiteKingPos.row][whiteKingPos.col].hasBeenInCheck = true;
+        } else if (this.turn === this.sockets[1].id && inCheckBlack) {
+            if (this.gameMode === "instantDeathChess") {
+                this.sockets[0].emit("/whiteWins");
+                this.sockets[1].emit("/whiteWins");
+                return;
+            }
+
+            this.board.board[blackKingPos.row][blackKingPos.col].hasBeenInCheck = true;
+        }
 
         if (this.turn === this.sockets[1].id && inCheckBlack && this.isCheckmate("Black")) {
             this.sockets[0].emit("/whiteWins");
@@ -114,12 +129,15 @@ class Room {
             //if the move is not undone it is valid, play move audio
             this.sockets[0].emit("/movePieceAudio");
             this.sockets[1].emit("/movePieceAudio");
+
+            //if the king, or a rook is not in original position, it has been moved
+            if (whiteKingPos.row != 7 || whiteKingPos.col != 4) this.board.board[whiteKingPos.row][whiteKingPos.col].hasMoved = true;
+            if (blackKingPos.row != 0 || blackKingPos.col != 4) this.board.board[blackKingPos.row][blackKingPos.col].hasMoved = true;
         }
 
         if (socket.id === this.sockets[0].id) this.selectedPieceWhite = -1;
         else this.selectedPieceBlack = -1;
     }
-
 
     undoMove(tempBoard) {
         this.board.board = tempBoard;

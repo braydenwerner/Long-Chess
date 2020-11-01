@@ -51,7 +51,7 @@ export function render() {
     if (!room) return;
 
     if (!NUM_TILES_WIDTH || !NUM_TILES_HEIGHT) {
-        if (room.gameMode === "standardChess" || room.gameMode === "chaosChess") {
+        if (room.gameMode === "standardChess" || room.gameMode === "instantDeathChess") {
             NUM_TILES_WIDTH = 8;
             NUM_TILES_HEIGHT = 8;
         } else if (room.gameMode === "longChess") {
