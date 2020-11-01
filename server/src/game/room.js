@@ -14,6 +14,7 @@ class Room {
         this.white;
 
         this.board = new Board(gameMode);
+        this.gameMode = gameMode;
     }
 
     addSocket(socket) {
@@ -42,7 +43,7 @@ class Room {
 
     makeMove(socket, moveData) {
         //return if out of bounds, not playing, choose empty piece,
-        // not enough players, not player's turn
+        // not enough players, not player's turn when gamemode is not chaos mode
         if (moveData.endRow < 0 || moveData.endRow >= this.board.NUM_TILES_HEIGHT
             || moveData.endCol < 0 || moveData.endCol >= this.board.NUM_TILES_WIDTH
             || this.board.board[moveData.startRow][moveData.startCol] === "empty"
