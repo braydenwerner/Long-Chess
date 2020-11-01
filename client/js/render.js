@@ -29,6 +29,7 @@ window.onresize = () => {
 }
 
 function initMapVars() {
+    console.log(gameMode);
     if (gameMode === "standardChess" || gameMode === "chaosChess") {
         NUM_TILES_WIDTH = 8;
         NUM_TILES_HEIGHT = 8;
