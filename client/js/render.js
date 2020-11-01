@@ -29,23 +29,14 @@ window.onresize = () => {
 }
 
 function initMapVars() {
-    console.log(gameMode);
-    if (gameMode === "standardChess" || gameMode === "chaosChess") {
-        NUM_TILES_WIDTH = 8;
-        NUM_TILES_HEIGHT = 8;
-    } else if (gameMode === "longChess") {
-        NUM_TILES_WIDTH = 4;
-        NUM_TILES_HEIGHT = 8;
-    }
-
     canvas.width = window.innerWidth - 2;
     canvas.height = window.innerHeight - 40;
     tileSize = (canvas.height - 2) / NUM_TILES_HEIGHT;
     offsetX = canvas.width / 2 - (NUM_TILES_WIDTH / 2 * tileSize);
+    console.log();
 }
 
 export function startRendering() {
-    initMapVars();
     interval = setInterval(render, 1000 / 60);
 }
 
@@ -59,6 +50,19 @@ export function render() {
 
     const { room } = getCurrentState();
     if (!room) return;
+
+    if (!NUM_TILES_WIDTH || !NUM_TILES_HEIGHT) {
+        if (room.gameMode === "standardChess" || room.gameMode === "chaosChess") {
+            NUM_TILES_WIDTH = 8;
+            NUM_TILES_HEIGHT = 8;
+        } else if (room.gameMode === "longChess") {
+            NUM_TILES_WIDTH = 4;
+            NUM_TILES_HEIGHT = 8;
+        }
+
+        initMapVars();
+    }
+
     whiteID = room.whiteID;
     board = room.board;
 

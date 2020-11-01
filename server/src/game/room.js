@@ -205,7 +205,8 @@ class Room {
             turn: this.turn,
             numPlayers: this.sockets.length,
             selectedPieceWhite: this.selectedPieceWhite,
-            selectedPieceBlack: this.selectedPieceBlack
+            selectedPieceBlack: this.selectedPieceBlack,
+            gameMode: this.gameMode,
         });
     }
 }
