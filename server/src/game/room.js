@@ -1,5 +1,7 @@
 const Board = require("./board");
 const King = require("./pieces/king");
+const Pawn = require("./pieces/pawn");
+const Queen = require("./pieces/queen");
 
 class Room {
     constructor(roomName, gameMode) {
@@ -69,6 +71,7 @@ class Room {
         //obtain a list of all possible moves of the selected piece and make move if valid
         let piece = this.board.board[moveData.startRow][moveData.startCol];
         let possibleMoves = piece.getMoves(this.board.board, moveData.startRow, moveData.startCol, this.board.NUM_TILES_WIDTH, this.board.NUM_TILES_HEIGHT);
+        let moveMade = false;
         for (let i = 0; i < possibleMoves.length; i++) {
             if (possibleMoves[i].col === moveData.endCol && possibleMoves[i].row === moveData.endRow) {
                 //check if its a king castle move
@@ -79,15 +82,24 @@ class Room {
                     this.board.board[possibleMoves[i].endRookRow][possibleMoves[i].endRookCol] = this.board.board[possibleMoves[i].startRookRow][possibleMoves[i].startRookCol];
                     this.board.board[possibleMoves[i].startRookRow][possibleMoves[i].startRookCol] = "empty";
                     this.turn = (this.turn === this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+                    moveMade = true;
                     break;
                 }
 
                 this.board.board[moveData.endRow][moveData.endCol] = this.board.board[moveData.startRow][moveData.startCol];
                 this.board.board[moveData.startRow][moveData.startCol] = "empty";
                 this.turn = (this.turn === this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
+                moveMade = true;
                 break;
             }
         }
+
+        if (!moveMade) {
+            this.sockets[0].emit("/illegalMove");
+            this.sockets[1].emit("/illegalMove");
+        }
+
+        this.checkForPromotion(this.board.board);
 
         let whiteKingPos = this.findKingPosition(this.board.board, "White");
         let blackKingPos = this.findKingPosition(this.board.board, "Black");
@@ -126,9 +138,11 @@ class Room {
         //undo move if the king is still in check at the end of turn
         if (this.turn === this.sockets[0].id && inCheckBlack || this.turn === this.sockets[1].id && inCheckWhite) this.undoMove(tempBoard);
         else {
-            //if the move is not undone it is valid, play move audio
-            this.sockets[0].emit("/movePieceAudio");
-            this.sockets[1].emit("/movePieceAudio");
+            //if the move is not undone and one is made, it is valid. play move audio
+            if (moveMade) {
+                this.sockets[0].emit("/movePieceAudio");
+                this.sockets[1].emit("/movePieceAudio");
+            }
 
             //if the king, or a rook is not in original position, it has been moved
             if (whiteKingPos.row != 7 || whiteKingPos.col != 4) this.board.board[whiteKingPos.row][whiteKingPos.col].hasMoved = true;
@@ -139,7 +153,25 @@ class Room {
         else this.selectedPieceBlack = -1;
     }
 
+    checkForPromotion(board) {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[0].length; j++) {
+                if (board[i][j] instanceof Pawn) {
+                    if (board[i][j].color === "White" && i === 0) {
+                        this.board.board[i][j] = new Queen("White");
+                        break;
+                    } else if (board[i][j].color === "Black" && i === 7) {
+                        this.board.board[i][j] = new Queen("Black");
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     undoMove(tempBoard) {
+        this.sockets[0].emit("/illegalMove");
+        this.sockets[1].emit("/illegalMove");
         this.board.board = tempBoard;
         this.turn = (this.turn == this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
     }

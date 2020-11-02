@@ -38,7 +38,7 @@ const gameModeImage = document.getElementById("gameModeImage");
 export let gameMode = "standardChess";
 
 let totalGameModes = 3;
-let gameModeIndex = 2;
+let gameModeIndex = 0;
 setGameModeImage(gameModeIndex);
 
 nextPageLeft.onclick = () => {

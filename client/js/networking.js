@@ -1,6 +1,6 @@
 import { processGameUpdate } from "./gameUpdate.js";
 import { duplicateRoom, roomFullOrNotExist, noError, whiteWins, blackWins } from "./app.js";
-import { gameStart, movePiece } from "./playAudio.js";
+import { gameStart, movePiece, illegalMove } from "./playAudio.js";
 
 const PORT = "https://long-chess.herokuapp.com/";
 //const PORT = "http://localhost:4000";
@@ -23,6 +23,7 @@ export const connect = () => {
 
         socket.on("/gameStartAudio", gameStart);
         socket.on("/movePieceAudio", movePiece);
+        socket.on("/illegalMove", illegalMove);
     });
 }
 

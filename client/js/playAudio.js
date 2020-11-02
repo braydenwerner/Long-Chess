@@ -13,3 +13,9 @@ export function movePiece() {
     moveSelf.volume = ".4";
     moveSelf.play();
 }
+
+export function illegalMove() {
+    let illegalMove = AUDIO["illegalMove.wav"].cloneNode();
+    illegalMove.volume = ".4";
+    illegalMove.play();
+}
