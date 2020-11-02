@@ -7,7 +7,7 @@ const Rook = require("./pieces/rook");
 
 class Board {
     constructor(gameMode) {
-        if (gameMode === "standardChess" || gameMode === "instantDeathChess") {
+        if (gameMode === "standardChess") {
             this.NUM_TILES_WIDTH = 8;
             this.NUM_TILES_HEIGHT = 8;
             this.board = [[new Rook("Black"), new Knight("Black"), new Bishop("Black"), new Queen("Black"), new King("Black"), new Bishop("Black"), new Knight("Black"), new Rook("Black")],
@@ -29,6 +29,17 @@ class Board {
             [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
             [new Bishop("White"), new Knight("White"), new Knight("White"), new Bishop("White")],
             [new Rook("White"), new Queen("White"), new King("White"), new Rook("White")]];
+        } else if (gameMode === "instantDeathChess") {
+            this.NUM_TILES_WIDTH = 6;
+            this.NUM_TILES_HEIGHT = 8;
+            this.board = [[new Rook("Black"), new Bishop("Black"), new Queen("Black"), new King("Black"), new Bishop("Black"), new Rook("Black")],
+            [new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black"), new Pawn("Black")],
+            ["empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty"],
+            ["empty", "empty", "empty", "empty", "empty", "empty"],
+            [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
+            [new Rook("White"), new Bishop("White"), new Queen("White"), new King("White"), new Bishop("White"), new Rook("White")]];
         }
     }
 

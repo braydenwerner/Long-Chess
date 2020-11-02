@@ -62,13 +62,17 @@ window.onresize = () => {
 }
 
 function setGameModeImage(gameModeIndex) {
-    if (gameModeIndex == 0 || gameModeIndex == 2) {
+    if (gameModeIndex == 0) {
         gameModeImage.src = "./Images/standardChessBoard.PNG";
         gameModeImage.style.width = window.innerWidth / 4.9 + "px";
         gameModeImage.style.height = window.innerWidth / 4.9 + "px";
     } else if (gameModeIndex == 1) {
         gameModeImage.src = "./Images/longChessBoard.PNG";
         gameModeImage.style.width = window.innerWidth / 9.8 + "px";
+        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
+    } else if (gameModeIndex == 2) {
+        gameModeImage.src = "./Images/instantDeathChessBoard.PNG";
+        gameModeImage.style.width = window.innerWidth / 6.2 + "px";
         gameModeImage.style.height = window.innerWidth / 4.9 + "px";
     }
 }

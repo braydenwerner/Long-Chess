@@ -51,11 +51,14 @@ export function render() {
     if (!room) return;
 
     if (!NUM_TILES_WIDTH || !NUM_TILES_HEIGHT) {
-        if (room.gameMode === "standardChess" || room.gameMode === "instantDeathChess") {
+        if (room.gameMode === "standardChess") {
             NUM_TILES_WIDTH = 8;
             NUM_TILES_HEIGHT = 8;
         } else if (room.gameMode === "longChess") {
             NUM_TILES_WIDTH = 4;
+            NUM_TILES_HEIGHT = 8;
+        } else if (room.gameMode === "instantDeathChess") {
+            NUM_TILES_WIDTH = 6;
             NUM_TILES_HEIGHT = 8;
         }
 
