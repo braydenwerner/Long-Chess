@@ -71,7 +71,7 @@ class Pawn extends ChessPiece {
             }
 
             //up two squares. Feature not avaliable in long chess. Can check gamemode using NUM_TILES_WIDTH variable
-            if (NUM_TILES_WIDTH === 8 && row === 1 && board[row + 1][col] === "empty" && board[row + 2][col] === "empty") {
+            if (NUM_TILES_WIDTH === 8 || NUM_TILES_WIDTH === 6 && row === 1 && board[row + 1][col] === "empty" && board[row + 2][col] === "empty") {
                 possibleMoves.push({
                     row: row + 2,
                     col: col
