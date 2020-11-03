@@ -95,8 +95,8 @@ class Room {
         }
 
         if (!moveMade) {
-            this.sockets[0].emit("/illegalMove");
-            this.sockets[1].emit("/illegalMove");
+            if (this.turn === this.sockets[0].id) this.sockets[0].emit("/illegalMove");
+            else this.sockets[1].emit("/illegalMove");
         }
 
         this.checkForPromotion(this.board.board);
@@ -170,8 +170,9 @@ class Room {
     }
 
     undoMove(tempBoard) {
-        this.sockets[0].emit("/illegalMove");
-        this.sockets[1].emit("/illegalMove");
+        if (this.turn === this.sockets[0].id) this.sockets[0].emit("/illegalMove");
+        else this.sockets[1].emit("/illegalMove");
+
         this.board.board = tempBoard;
         this.turn = (this.turn == this.sockets[0].id) ? this.sockets[1].id : this.sockets[0].id;
     }
