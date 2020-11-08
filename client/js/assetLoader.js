@@ -35,6 +35,7 @@ const AUDIO_FILES = [
     "game-start.wav",
     "move-self.wav",
     "illegalMove.wav",
+    "menu-music.wav"
 ];
 
 const audioObject = {};

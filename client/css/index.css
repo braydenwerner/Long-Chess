@@ -19,6 +19,14 @@ html, body {
     color: rgb(255, 255, 255);
 }
 
+#audioIcon {
+    position: absolute;
+    left: 1%;
+    top: 1%;
+    width: 55px;
+    height: 55px;
+}
+
 #joinContainer {
     display: flex;
     flex-direction: column;

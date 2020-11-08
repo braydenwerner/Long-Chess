@@ -2,13 +2,15 @@ import { connect, createRoom, joinRoom } from "./networking.js";
 import { startCaptureInput, stopCaptureInput } from "./input.js"
 import { downloadAudios, downloadImages } from "./assetLoader.js";
 import { startRendering } from "./render.js";
+import { playMenuMusic, pauseMenuMusic } from "./playAudio.js";
+
+const audioIcon = document.getElementById("audioIcon");
 
 const joinContainer = document.getElementById("joinContainer");
 const createRoomButton = document.getElementById("createRoomButton");
 const joinRoomButton = document.getElementById("joinRoomButton");
 const display = document.getElementById("display");
 
-const createRoomContainer = document.getElementById("createRoomContainer");
 const createRoomPopupOverlay = document.getElementById("createRoomPopupOverlay");
 const createRoomInput = document.getElementById("createRoomInput");
 const submitCreateRoomButton = document.getElementById("submitCreateRoomButton");
@@ -107,6 +109,19 @@ function clearDisplays() {
 }
 
 Promise.all([connect(), downloadImages(), downloadAudios()]);
+
+let playing = false;
+audioIcon.onclick = () => {
+    playing = !playing;
+
+    if (playing) {
+        playMenuMusic();
+        audioIcon.src = "./images/audioIcon.png";
+    } else {
+        pauseMenuMusic();
+        audioIcon.src = "./images/noAudio.png";
+    }
+}
 
 createRoomButton.onclick = () => {
     createRoomPopupOverlay.style.display = "initial";
