@@ -171,6 +171,9 @@ function validInput(input) {
 }
 
 function startGame(room, joinOption, gameMode) {
+    pauseMenuMusic();
+    audioIcon.style.display = "none";
+
     if (joinOption === "create") createRoom(room, gameMode);
     else if (joinOption === "join") joinRoom(room);
 }

@@ -32,10 +32,10 @@ export const downloadImages = () => downloadPromiseImage;
 export const getImages = () => images;
 
 const AUDIO_FILES = [
-    "game-start.wav",
-    "move-self.wav",
-    "illegalMove.wav",
-    "menu-music.wav"
+    "game-start.mp3",
+    "move-self.mp3",
+    "illegalMove.mp3",
+    "menu-music.mp3"
 ];
 
 const audioObject = {};
