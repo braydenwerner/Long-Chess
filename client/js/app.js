@@ -183,6 +183,11 @@ export function duplicateRoom() {
     alert("Room already exists!");
 }
 
+export function gameAlreadyStarted() {
+    display.style.display = "none";
+    alert("The game has already started!");
+}
+
 export function roomFullOrNotExist() {
     display.style.display = "none";
     alert("Room is full or does not exist!");
