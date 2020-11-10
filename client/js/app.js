@@ -174,8 +174,12 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
         audioIcon.style.display = "none";
 
         console.log(gameMode);
-        if (joinOption === "create") createRoom(room, gameMode);
-        else if (joinOption === "join") joinRoom(room);
+        if (gameMode) {
+            if (joinOption === "create") createRoom(room, gameMode);
+            else if (joinOption === "join") joinRoom(room);
+        } else {
+            console.log("gameMode is undefined");
+        }
     }
 });
 
