@@ -108,77 +108,77 @@ function clearDisplays() {
     instantDeathChessSubHeader.style.display = "none";
 }
 
-Promise.all([connect(), downloadImages(), downloadAudios()]);
-console.log(gameMode);
+Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
+    let playing = false;
+    audioIcon.onclick = () => {
+        playing = !playing;
 
-let playing = false;
-audioIcon.onclick = () => {
-    playing = !playing;
-
-    if (playing) {
-        playMenuMusic();
-        audioIcon.src = "./images/audioIcon.png";
-    } else {
-        pauseMenuMusic();
-        audioIcon.src = "./images/noAudio.png";
+        if (playing) {
+            playMenuMusic();
+            audioIcon.src = "./images/audioIcon.png";
+        } else {
+            pauseMenuMusic();
+            audioIcon.src = "./images/noAudio.png";
+        }
     }
-}
 
-createRoomButton.onclick = () => {
-    createRoomPopupOverlay.style.display = "initial";
-}
+    createRoomButton.onclick = () => {
+        createRoomPopupOverlay.style.display = "initial";
+    }
 
-createRoomInput.onkeyup = e => {
-    if (e.key === "Enter" && validInput(createRoomInput.value)) {
+    createRoomInput.onkeyup = e => {
+        if (e.key === "Enter" && validInput(createRoomInput.value)) {
+            createRoomPopupOverlay.style.display = "none";
+            startGame(createRoomInput.value, "create", gameMode);
+        }
+    }
+
+    submitCreateRoomButton.onclick = () => {
+        if (validInput(createRoomInput.value)) {
+            createRoomPopupOverlay.style.display = "none";
+            console.log("createRoomInput.value: " + createRoomInput.value);
+            startGame(createRoomInput.value, "create");
+        }
+    }
+
+    closeCreateRoomPopup.onclick = () => {
         createRoomPopupOverlay.style.display = "none";
-        startGame(createRoomInput.value, "create", gameMode);
     }
-}
 
-submitCreateRoomButton.onclick = () => {
-    if (validInput(createRoomInput.value)) {
-        createRoomPopupOverlay.style.display = "none";
-        console.log("createRoomInput.value: " + createRoomInput.value);
-        startGame(createRoomInput.value, "create");
+    joinRoomButton.onclick = () => {
+        joinRoomPopupOverlay.style.display = "initial";
     }
-}
 
-closeCreateRoomPopup.onclick = () => {
-    createRoomPopupOverlay.style.display = "none";
-}
+    joinRoomInput.onkeyup = e => {
+        //make safer, no injection of html
+        if (e.key === "Enter") {
+            joinRoomPopupOverlay.style.display = "none";
+            startGame(joinRoomInput.value, "join");
+        }
+    }
 
-joinRoomButton.onclick = () => {
-    joinRoomPopupOverlay.style.display = "initial";
-}
-
-joinRoomInput.onkeyup = e => {
-    //make safer, no injection of html
-    if (e.key === "Enter") {
+    closeJoinRoomPopup.onclick = () => {
         joinRoomPopupOverlay.style.display = "none";
-        startGame(joinRoomInput.value, "join");
     }
-}
 
-closeJoinRoomPopup.onclick = () => {
-    joinRoomPopupOverlay.style.display = "none";
-}
-
-function validInput(input) {
-    let valid = /^[0-9a-zA-Z]+$/;
-    if (input.match(valid)) return true;
-    else {
-        alert("Room codes must only contain letters and digits.");
-        return false;
+    function validInput(input) {
+        let valid = /^[0-9a-zA-Z]+$/;
+        if (input.match(valid)) return true;
+        else {
+            alert("Room codes must only contain letters and digits.");
+            return false;
+        }
     }
-}
 
-function startGame(room, joinOption, gameMode) {
-    pauseMenuMusic();
-    audioIcon.style.display = "none";
+    function startGame(room, joinOption, gameMode) {
+        pauseMenuMusic();
+        audioIcon.style.display = "none";
 
-    if (joinOption === "create") createRoom(room, gameMode);
-    else if (joinOption === "join") joinRoom(room);
-}
+        console.log(gameMode);
+        if (joinOption === "create") createRoom(room, gameMode);
+        else if (joinOption === "join") joinRoom(room);
+    }
+});
 
 export function duplicateRoom() {
     display.style.display = "none";
@@ -219,5 +219,8 @@ export function blackWins() {
     winScreenPopupOverlay.style.display = "initial";
     winMessage.innerText = "Black Wins";
 }
+
+
+
 
 
