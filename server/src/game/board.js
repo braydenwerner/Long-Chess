@@ -45,6 +45,8 @@ class Board {
             this.NUM_TILES_HEIGHT = 1;
             this.board = [["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]];
         }
+
+        console.log(this.board);
     }
 
     serializeBoard() {
