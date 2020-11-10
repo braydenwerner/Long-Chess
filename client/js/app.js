@@ -38,77 +38,76 @@ const nextPageRight = document.getElementById("nextPageRight");
 const gameModeImage = document.getElementById("gameModeImage");
 
 export let gameMode = "standardChess";
-
-let totalGameModes = 3;
-let gameModeIndex = 0;
-setGameModeImage(gameModeIndex);
-
-nextPageLeft.onclick = () => {
-    gameModeIndex--;
-    if (gameModeIndex < 0) gameModeIndex = totalGameModes - 1;
-
-    setGameModeImage(gameModeIndex);
-    setGamemode(gameModeIndex);
-}
-
-nextPageRight.onclick = () => {
-    gameModeIndex++;
-    if (gameModeIndex >= totalGameModes) gameModeIndex = 0;
-
-    setGameModeImage(gameModeIndex);
-    setGamemode(gameModeIndex);
-}
-
-window.onresize = () => {
-    setGameModeImage(gameModeIndex);
-}
-
-function setGameModeImage(gameModeIndex) {
-    if (gameModeIndex == 0) {
-        gameModeImage.src = "./Images/standardChessBoard.PNG";
-        gameModeImage.style.width = window.innerWidth / 4.9 + "px";
-        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
-    } else if (gameModeIndex == 1) {
-        gameModeImage.src = "./Images/longChessBoard.PNG";
-        gameModeImage.style.width = window.innerWidth / 9.8 + "px";
-        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
-    } else if (gameModeIndex == 2) {
-        gameModeImage.src = "./Images/instantDeathChessBoard.PNG";
-        gameModeImage.style.width = window.innerWidth / 6.2 + "px";
-        gameModeImage.style.height = window.innerWidth / 4.9 + "px";
-    }
-}
-
-
-function setGamemode(gameModeIndex) {
-    if (gameModeIndex == 0) {
-        clearDisplays();
-        gameMode = "standardChess";
-        standardChessMainHeader.style.display = "initial";
-        standardChessSubHeader.style.display = "initial";
-    } else if (gameModeIndex == 1) {
-        clearDisplays();
-        gameMode = "longChess";
-        longChessMainHeader.style.display = "initial";
-        longChessSubHeader.style.display = "initial";
-    } else if (gameModeIndex == 2) {
-        clearDisplays();
-        gameMode = "instantDeathChess";
-        instantDeathChessMainHeader.style.display = "initial";
-        instantDeathChessSubHeader.style.display = "initial";
-    }
-}
-
-function clearDisplays() {
-    standardChessMainHeader.style.display = "none";
-    standardChessSubHeader.style.display = "none";
-    longChessMainHeader.style.display = "none";
-    longChessSubHeader.style.display = "none";
-    instantDeathChessMainHeader.style.display = "none";
-    instantDeathChessSubHeader.style.display = "none";
-}
-
 Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
+    let totalGameModes = 3;
+    let gameModeIndex = 0;
+    setGameModeImage(gameModeIndex);
+
+    nextPageLeft.onclick = () => {
+        gameModeIndex--;
+        if (gameModeIndex < 0) gameModeIndex = totalGameModes - 1;
+
+        setGameModeImage(gameModeIndex);
+        setGamemode(gameModeIndex);
+    }
+
+    nextPageRight.onclick = () => {
+        gameModeIndex++;
+        if (gameModeIndex >= totalGameModes) gameModeIndex = 0;
+
+        setGameModeImage(gameModeIndex);
+        setGamemode(gameModeIndex);
+    }
+
+    window.onresize = () => {
+        setGameModeImage(gameModeIndex);
+    }
+
+    function setGameModeImage(gameModeIndex) {
+        if (gameModeIndex == 0) {
+            gameModeImage.src = "./Images/standardChessBoard.PNG";
+            gameModeImage.style.width = window.innerWidth / 4.9 + "px";
+            gameModeImage.style.height = window.innerWidth / 4.9 + "px";
+        } else if (gameModeIndex == 1) {
+            gameModeImage.src = "./Images/longChessBoard.PNG";
+            gameModeImage.style.width = window.innerWidth / 9.8 + "px";
+            gameModeImage.style.height = window.innerWidth / 4.9 + "px";
+        } else if (gameModeIndex == 2) {
+            gameModeImage.src = "./Images/instantDeathChessBoard.PNG";
+            gameModeImage.style.width = window.innerWidth / 6.2 + "px";
+            gameModeImage.style.height = window.innerWidth / 4.9 + "px";
+        }
+    }
+
+
+    function setGamemode(gameModeIndex) {
+        if (gameModeIndex == 0) {
+            clearDisplays();
+            gameMode = "standardChess";
+            standardChessMainHeader.style.display = "initial";
+            standardChessSubHeader.style.display = "initial";
+        } else if (gameModeIndex == 1) {
+            clearDisplays();
+            gameMode = "longChess";
+            longChessMainHeader.style.display = "initial";
+            longChessSubHeader.style.display = "initial";
+        } else if (gameModeIndex == 2) {
+            clearDisplays();
+            gameMode = "instantDeathChess";
+            instantDeathChessMainHeader.style.display = "initial";
+            instantDeathChessSubHeader.style.display = "initial";
+        }
+    }
+
+    function clearDisplays() {
+        standardChessMainHeader.style.display = "none";
+        standardChessSubHeader.style.display = "none";
+        longChessMainHeader.style.display = "none";
+        longChessSubHeader.style.display = "none";
+        instantDeathChessMainHeader.style.display = "none";
+        instantDeathChessSubHeader.style.display = "none";
+    }
+
     let playing = false;
     audioIcon.onclick = () => {
         playing = !playing;
@@ -219,8 +218,3 @@ export function blackWins() {
     winScreenPopupOverlay.style.display = "initial";
     winMessage.innerText = "Black Wins";
 }
-
-
-
-
-
