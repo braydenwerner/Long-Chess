@@ -7,8 +7,8 @@ html, body {
 #github {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    right: 20px;
+    top: 20px;
     color: rgb(255, 255, 255);
 }
 
@@ -20,8 +20,8 @@ html, body {
 
 #audioIcon {
     position: absolute;
-    right: 1%;
-    bottom: 1%;
+    left: 1%;
+    top: 1%;
     width: 55px;
     height: 55px;
 }
