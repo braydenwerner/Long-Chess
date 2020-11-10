@@ -168,8 +168,6 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
     }
 
     function startGame(room, joinOption, gameMode) {
-        pauseMenuMusic();
-
         if (gameMode) {
             if (joinOption === "create") createRoom(room, gameMode);
             else if (joinOption === "join") joinRoom(room);
