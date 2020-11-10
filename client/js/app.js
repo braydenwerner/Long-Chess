@@ -79,7 +79,6 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
         }
     }
 
-
     function setGamemode(gameModeIndex) {
         if (gameModeIndex == 0) {
             clearDisplays();
@@ -174,6 +173,7 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
         audioIcon.style.display = "none";
 
         console.log(gameMode);
+        console.log(gameModeIndex);
         if (gameMode) {
             if (joinOption === "create") createRoom(room, gameMode);
             else if (joinOption === "join") joinRoom(room);
