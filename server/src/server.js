@@ -27,8 +27,6 @@ io.on("connection", socket => {
   socket.on("/joinRoom", (roomName) => {
     if (!game.rooms[roomName] || game.rooms[roomName].sockets.length >= 2) {
       socket.emit("/roomFullOrNotExist");
-    } else if (game.rooms[roomName] && game.rooms[roomName].playing) {
-      socket.emit("/gameAlreadyStarted");
     } else {
       socket.emit("/noError");
       game.addSocket(socket, roomName);
