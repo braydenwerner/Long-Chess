@@ -17,7 +17,6 @@ const io = socketio(server);
 
 io.on("connection", socket => {
   socket.on("/createRoom", (roomName, gameMode) => {
-    console.log("gameMode: " + gameMode);
     if (game.rooms[roomName]) socket.emit("/alreadyExists");
     else {
       socket.emit("/noError");

@@ -10,10 +10,6 @@ class Game {
   }
 
   addSocket(socket, roomName, gameMode) {
-    console.log("socket: " + socket);
-    console.log("roomName: " + roomName);
-    console.log("gameMode: " + gameMode);
-
     if (this.rooms[roomName]) this.rooms[roomName].addSocket(socket)
     else {
       this.rooms[roomName] = new Room(roomName, gameMode);

@@ -134,7 +134,6 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
     submitCreateRoomButton.onclick = () => {
         if (validInput(createRoomInput.value)) {
             createRoomPopupOverlay.style.display = "none";
-            console.log("createRoomInput.value: " + createRoomInput.value);
             startGame(createRoomInput.value, "create");
         }
     }
@@ -172,17 +171,13 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
         pauseMenuMusic();
         audioIcon.style.display = "none";
 
-        console.log(gameMode);
-        console.log(gameModeIndex);
         if (gameMode) {
             if (joinOption === "create") createRoom(room, gameMode);
             else if (joinOption === "join") joinRoom(room);
         } else {
-            console.log("gameMode is undefined");
             if (gameModeIndex == 0) gameMode = "standardChess";
             else if (gameModeIndex == 1) gameMode = "longChess";
             else if (gameModeIndex == 2) gameMode = "instantDeathChess"
-            console.log("Fixed gameMode: " + gameMode);
 
             if (joinOption === "create") createRoom(room, gameMode);
             else if (joinOption === "join") joinRoom(room);
