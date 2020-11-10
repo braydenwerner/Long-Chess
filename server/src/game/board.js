@@ -43,7 +43,7 @@ class Board {
         } else {
             this.NUM_TILES_WIDTH = 8;
             this.NUM_TILES_HEIGHT = 1;
-            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+            this.board = [["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]];
         }
     }
 
