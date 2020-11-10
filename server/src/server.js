@@ -17,6 +17,7 @@ const io = socketio(server);
 
 io.on("connection", socket => {
   socket.on("/createRoom", (roomName, gameMode) => {
+    console.log("gameMode: " + gameMode);
     if (game.rooms[roomName]) socket.emit("/alreadyExists");
     else {
       socket.emit("/noError");
@@ -25,7 +26,6 @@ io.on("connection", socket => {
   });
 
   socket.on("/joinRoom", (roomName) => {
-    console.log("roomName in server.js: " + roomName);
     if (!game.rooms[roomName] || game.rooms[roomName].sockets.length >= 2) {
       socket.emit("/roomFullOrNotExist");
     } else {

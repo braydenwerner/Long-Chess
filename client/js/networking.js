@@ -29,6 +29,9 @@ export const connect = () => {
 }
 
 export const createRoom = (roomName, gameMode) => {
+    console.log("reached create room");
+    console.log(roomName);
+    console.log(gameMode);
     socket.emit("/createRoom", roomName, gameMode);
 }
 
