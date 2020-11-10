@@ -137,6 +137,7 @@ createRoomInput.onkeyup = e => {
 submitCreateRoomButton.onclick = () => {
     if (validInput(createRoomInput.value)) {
         createRoomPopupOverlay.style.display = "none";
+        console.log("createRoomInput.value: " + createRoomInput.value);
         startGame(createRoomInput.value, "create");
     }
 }

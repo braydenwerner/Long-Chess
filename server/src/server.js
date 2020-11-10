@@ -25,6 +25,7 @@ io.on("connection", socket => {
   });
 
   socket.on("/joinRoom", (roomName) => {
+    console.log("roomName in server.js: " + roomName);
     if (!game.rooms[roomName] || game.rooms[roomName].sockets.length >= 2) {
       socket.emit("/roomFullOrNotExist");
     } else {

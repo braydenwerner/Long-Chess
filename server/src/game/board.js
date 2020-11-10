@@ -8,6 +8,8 @@ const Rook = require("./pieces/rook");
 class Board {
     constructor(gameMode) {
         console.log("gameMode: " + gameMode);
+        if (!gameMode) gameMode = "standardChess";
+
         if (gameMode === "standardChess") {
             this.NUM_TILES_WIDTH = 8;
             this.NUM_TILES_HEIGHT = 8;
@@ -41,12 +43,7 @@ class Board {
             ["empty", "empty", "empty", "empty", "empty", "empty"],
             [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
             [new Rook("White"), new Bishop("White"), new Queen("White"), new King("White"), new Bishop("White"), new Rook("White")]];
-        } else {
-            this.NUM_TILES_WIDTH = 8;
-            this.NUM_TILES_HEIGHT = 1;
-            this.board = [["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]];
         }
-
         console.log(this.board);
     }
 
