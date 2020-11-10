@@ -79,6 +79,7 @@ export function render() {
 }
 
 function renderBoard(board) {
+    console.log(board);
     //render board
     let color = "#eeeed2";
     for (let i = 0; i < NUM_TILES_HEIGHT; i++) {
