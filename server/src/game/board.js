@@ -40,6 +40,10 @@ class Board {
             ["empty", "empty", "empty", "empty", "empty", "empty"],
             [new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White"), new Pawn("White")],
             [new Rook("White"), new Bishop("White"), new Queen("White"), new King("White"), new Bishop("White"), new Rook("White")]];
+        } else {
+            this.NUM_TILES_WIDTH = 8;
+            this.NUM_TILES_HEIGHT = 1;
+            ["empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
         }
     }
 
