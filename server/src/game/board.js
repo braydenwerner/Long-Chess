@@ -50,19 +50,19 @@ class Board {
             clientBoard[i] = new Array(this.NUM_TILES_WIDTH);
         }
 
-        if (this.board) {
-            for (let i = 0; i < this.board.length; i++) {
-                for (let j = 0; j < this.board[0].length; j++) {
-                    if (this.board[i][j] instanceof Bishop) clientBoard[i][j] = "bishop" + this.board[i][j].color + ".png";
-                    else if (this.board[i][j] instanceof King) clientBoard[i][j] = "king" + this.board[i][j].color + ".png";
-                    else if (this.board[i][j] instanceof Knight) clientBoard[i][j] = "knight" + this.board[i][j].color + ".png";
-                    else if (this.board[i][j] instanceof Pawn) clientBoard[i][j] = "pawn" + this.board[i][j].color + ".png";
-                    else if (this.board[i][j] instanceof Queen) clientBoard[i][j] = "queen" + this.board[i][j].color + ".png";
-                    else if (this.board[i][j] instanceof Rook) clientBoard[i][j] = "rook" + this.board[i][j].color + ".png";
-                    else clientBoard[i][j] = "empty";
-                }
+
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[0].length; j++) {
+                if (this.board[i][j] instanceof Bishop) clientBoard[i][j] = "bishop" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof King) clientBoard[i][j] = "king" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Knight) clientBoard[i][j] = "knight" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Pawn) clientBoard[i][j] = "pawn" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Queen) clientBoard[i][j] = "queen" + this.board[i][j].color + ".png";
+                else if (this.board[i][j] instanceof Rook) clientBoard[i][j] = "rook" + this.board[i][j].color + ".png";
+                else clientBoard[i][j] = "empty";
             }
         }
+
 
         return clientBoard;
     }
