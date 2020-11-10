@@ -50,7 +50,6 @@ class Board {
             clientBoard[i] = new Array(this.NUM_TILES_WIDTH);
         }
 
-
         for (let i = 0; i < this.board.length; i++) {
             for (let j = 0; j < this.board[0].length; j++) {
                 if (this.board[i][j] instanceof Bishop) clientBoard[i][j] = "bishop" + this.board[i][j].color + ".png";
@@ -62,7 +61,6 @@ class Board {
                 else clientBoard[i][j] = "empty";
             }
         }
-
 
         return clientBoard;
     }
