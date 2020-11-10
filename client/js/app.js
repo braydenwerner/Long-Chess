@@ -179,6 +179,8 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
             else if (joinOption === "join") joinRoom(room);
         } else {
             console.log("gameMode is undefined");
+            setGameMode(gameModeIndex);
+            console.log("Fixed gameMode: " + gameMode);
         }
     }
 });
