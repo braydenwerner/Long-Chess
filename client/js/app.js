@@ -109,6 +109,7 @@ function clearDisplays() {
 }
 
 Promise.all([connect(), downloadImages(), downloadAudios()]);
+console.log(gameMode);
 
 let playing = false;
 audioIcon.onclick = () => {
