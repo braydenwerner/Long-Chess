@@ -7,6 +7,7 @@ const Rook = require("./pieces/rook");
 
 class Board {
     constructor(gameMode) {
+        console.log("gameMode: " + gameMode);
         if (gameMode === "standardChess") {
             this.NUM_TILES_WIDTH = 8;
             this.NUM_TILES_HEIGHT = 8;
