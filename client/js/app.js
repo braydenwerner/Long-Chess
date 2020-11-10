@@ -179,8 +179,13 @@ Promise.all([connect(), downloadImages(), downloadAudios()]).then(() => {
             else if (joinOption === "join") joinRoom(room);
         } else {
             console.log("gameMode is undefined");
-            setGameMode(gameModeIndex);
+            if (gameModeIndex == 0) gameMode = "standardChess";
+            else if (gameModeIndex == 1) gameMode = "longChess";
+            else if (gameModeIndex == 2) gameMode = "instantDeathChess"
             console.log("Fixed gameMode: " + gameMode);
+
+            if (joinOption === "create") createRoom(room, gameMode);
+            else if (joinOption === "join") joinRoom(room);
         }
     }
 });
